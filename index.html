@@ -335,7 +335,7 @@ footer a{color:var(--cream)}
         <div class="speed">Keys this month · percent of gross</div>
         <p>A wall, a rack and a register inside a store that is already open on the avenue. The lights are already on. The foot traffic is already in the door.</p>
         <ul>
-          <li>Pitch store owners PJ already knows first. They have seen the cart.</li>
+          <li>Pitch store owners PJ already knows first. They have seen the work.</li>
           <li>The store's own lease may not allow it. Ask them to check before anything is signed.</li>
         </ul>
       </div>
@@ -353,7 +353,7 @@ footer a{color:var(--cream)}
         <li><span class="dot">1</span><div><div class="when">Week of Sep 21</div><div class="what">Paper first</div><div class="why">File the sales tax certificate. Confirm the entity that signs. Get a general liability insurance quote; owners will ask to be named on the certificate. Lawyer's fifteen minutes on the license.</div></div></li>
         <li><span class="dot">2</span><div><div class="when">Sep 28 to Oct 11</div><div class="what">Walk and dial</div><div class="why">Walk the avenue list. Photograph every sign. Call twenty numbers. Book three viewings. Price the marketplace listings as the backup.</div></div></li>
         <li class="transfer"><span class="dot">T</span><div><div class="when">By Fri Oct 16</div><div class="what">Transfer point</div><div class="why">Signed license from Track 1 or 3? Keep going. Nothing signed? Book Track 2 that day. No second-guessing.</div></div></li>
-        <li><span class="dot">3</span><div><div class="when">Oct 19 to Nov 15</div><div class="what">Fit it like the cart</div><div class="why">Racks, light, register, signage. Nothing that counts as construction. Turn on Square item tracking before the first sale in the room.</div></div></li>
+        <li><span class="dot">3</span><div><div class="when">Oct 19 to Nov 15</div><div class="what">Fit it light</div><div class="why">Racks, light, register, signage. Nothing that counts as construction. Turn on Square item tracking before the first sale in the room.</div></div></li>
         <li><span class="dot">4</span><div><div class="when">Fri Nov 20</div><div class="what">Doors open</div><div class="why">Run through January 3. Every week of receipts is the pitch for the next door.</div></div></li>
       </ol>
     </div>
@@ -376,7 +376,7 @@ footer a{color:var(--cream)}
       </div>
       <div>
         <div class="receipts">
-          <div class="k">Square receipts · from the cart</div>
+          <div class="k">Square receipts · at the Seaport</div>
           <div class="big">$32,212</div>
           <div style="font-family:var(--advis);font-size:13px">gross, July 1 to September 3, 2026</div>
           <dl><dt>Transactions</dt><dd>324</dd><dt>Average sale</dt><dd>about $99</dd><dt>Per week</dt><dd>about $3,470</dd><dt>Selling since</dt><dd>2012</dd></dl>
@@ -527,13 +527,13 @@ function tick(){
 }
 tick(); setInterval(tick, 30000);
 
-/* calculator: weekly space cost against the cart's run rate */
+/* calculator: weekly space cost against the Seaport run rate */
 const WEEK = 32212 / (65 / 7);
 function calc(){
   const c = Math.max(0, +$("#wk").value || 0);
   const pct = c / WEEK * 100;
-  let say = pct <= 20 ? "Runs. Room left for light, racks and a bad week." : pct <= 35 ? "Tight. Works only if the room sells better than the cart." : "No. The room would eat the receipts.";
-  $("#calc-out").innerHTML = `<b>${Math.round(pct)}%</b> of about $${fmt(Math.round(WEEK / 10) * 10)} a week at cart pace.<br>${say}<br><span style="color:var(--cement)">Rule of thumb, not a forecast. A room may sell more or less than the cart. <span class="unc">Unconfirmed</span></span>`;
+  let say = pct <= 20 ? "Runs. Room left for light, racks and a bad week." : pct <= 35 ? "Tight. Works only if the room sells better than the Seaport." : "No. The room would eat the receipts.";
+  $("#calc-out").innerHTML = `<b>${Math.round(pct)}%</b> of about $${fmt(Math.round(WEEK / 10) * 10)} a week at Seaport pace.<br>${say}<br><span style="color:var(--cement)">Rule of thumb, not a forecast. An East Village room is not the Seaport crowd. It may sell more or less. <span class="unc">Unconfirmed</span></span>`;
 }
 $("#wk").addEventListener("input", calc); calc();
 
