@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keeping the Lights On</title>
+<meta name="description" content="Service advisory for dark storefronts. The occupancy product, the list of long-dark doors in the East Village and Lower East Side, and the express route to a pop-up by November 20.">
+<meta name="theme-color" content="#0C0C0C">
+<meta property="og:title" content="Keeping the Lights On · Service Advisory">
+<meta property="og:description" content="Dark storefronts are stations. The deal is the transfer. Platform's Edge / PJ O'Rourke II.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&family=Oswald:wght@500;600&family=Roboto+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+:root{
+  --ink:#0C0C0C; --cement:#9B9B95; --cream:#F3EFE4; --yellow:#F6C500; --orange:#F0611F; --royal:#1E4FD6; --olive:#5F6B3C;
+  --paper:#F3EFE4; --rule:#0C0C0C; --soft:#D9D4C6;
+  --sign:"Anton",Impact,"Arial Narrow",sans-serif;
+  --advis:"Roboto Mono",ui-monospace,Menlo,monospace;
+  --glyph:"Archivo Black","Arial Black",sans-serif;
+  --data:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --read:"Inter",system-ui,-apple-system,sans-serif;
+  --col:"Oswald","Arial Narrow",sans-serif;
+}
+*{box-sizing:border-box}
+html{background:var(--ink);scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--read);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+p{max-width:62ch;margin:0 0 14px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+
+/* ---------- roundels ---------- */
+.rd{--c:var(--ink);--t:var(--cream);display:inline-grid;place-items:center;width:1.9em;height:1.9em;border-radius:50%;background:var(--c);color:var(--t);font-family:var(--glyph);font-size:1em;line-height:1;flex:none;letter-spacing:0}
+.rd.y{--c:var(--yellow);--t:var(--ink)} .rd.o{--c:var(--orange)} .rd.r{--c:var(--royal)} .rd.g{--c:var(--olive)} .rd.c{--c:var(--cement);--t:var(--ink)}
+.rd.dia{border-radius:0;transform:rotate(45deg);width:1.55em;height:1.55em}
+.rd.dia>span{transform:rotate(-45deg)}
+
+/* ---------- hazard ---------- */
+.hazard{height:18px;background:repeating-linear-gradient(-45deg,var(--yellow) 0 16px,var(--ink) 16px 32px)}
+.hazard.o{background:repeating-linear-gradient(-45deg,var(--orange) 0 16px,var(--ink) 16px 32px)}
+
+/* ---------- masthead ---------- */
+.mast{background:var(--ink);color:var(--cream)}
+.mast .bar{display:flex;justify-content:space-between;gap:16px;padding:12px 24px;font-family:var(--advis);font-size:12px;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid #2a2a2a}
+.mast .bar b{color:var(--yellow);font-weight:700}
+.mast .bar .clock{font-variant-numeric:tabular-nums}
+.hero{display:grid;grid-template-columns:1fr 300px;gap:40px;padding:56px 24px 48px;max-width:1160px;margin:0 auto;align-items:end}
+.hero .kick{display:flex;gap:10px;align-items:center;font-family:var(--advis);font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:22px;flex-wrap:wrap}
+.hero .kick .tag{background:var(--yellow);color:var(--ink);padding:4px 10px;font-weight:700}
+.hero h1{font-family:var(--sign);font-weight:400;text-transform:uppercase;font-size:clamp(64px,11.5vw,168px);line-height:.86;letter-spacing:.005em;margin:0 0 26px}
+.hero h1 .y{color:var(--yellow)}
+.hero .dek{font-family:var(--advis);font-size:clamp(15px,1.6vw,18px);line-height:1.55;max-width:56ch;color:#E8E3D6}
+.sig{border:2px dashed var(--cement);aspect-ratio:1/1;display:grid;place-items:center;text-align:center;font-family:var(--advis);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cement);padding:18px}
+.sig b{display:block;font-family:var(--sign);font-weight:400;font-size:34px;letter-spacing:.02em;color:var(--cream);margin-bottom:8px}
+.lines{display:flex;gap:8px;padding:0 24px 22px;max-width:1160px;margin:0 auto;flex-wrap:wrap;font-size:15px}
+.lines a{display:flex;align-items:center;gap:8px;text-decoration:none;font-family:var(--col);font-weight:500;text-transform:uppercase;letter-spacing:.06em;font-size:14px;color:var(--cream);padding:6px 12px 6px 6px;border:1px solid #333}
+.lines a:hover{background:#1c1c1c}
+
+/* ---------- advisory section header ---------- */
+.adv{margin-top:90px}
+.adv-head{background:var(--yellow);color:var(--ink)}
+.adv-head .in{display:flex;align-items:center;gap:18px;padding:22px 24px;max-width:1160px;margin:0 auto}
+.adv-head .rd{font-size:34px}
+.adv-head .t small{display:block;font-family:var(--advis);font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;margin-bottom:4px}
+.adv-head h2{font-family:var(--sign);font-weight:400;text-transform:uppercase;font-size:clamp(38px,5.6vw,72px);line-height:.92;margin:0;letter-spacing:.005em}
+.adv-head.ink{background:var(--ink);color:var(--cream)} .adv-head.ink small{color:var(--yellow)}
+.adv-head.orange{background:var(--orange);color:var(--ink)}
+.adv-body{padding:40px 24px 0;max-width:1160px;margin:0 auto}
+.lede{font-family:var(--advis);font-size:clamp(17px,1.9vw,21px);line-height:1.5;max-width:60ch;margin-bottom:28px}
+
+/* ---------- UNCONFIRMED ---------- */
+.unc{display:inline-flex;align-items:center;gap:6px;background:var(--orange);color:var(--ink);font-family:var(--advis);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:2px 8px;vertical-align:.12em;white-space:nowrap}
+.unc::before{content:"!";display:inline-grid;place-items:center;width:14px;height:14px;background:var(--ink);color:var(--orange);border-radius:50%;font-size:10px}
+.ok{display:inline-flex;gap:6px;background:var(--olive);color:var(--cream);font-family:var(--advis);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:2px 8px;vertical-align:.12em;white-space:nowrap}
+
+/* ---------- express ---------- */
+.clockbox{display:grid;grid-template-columns:repeat(3,1fr);border:3px solid var(--ink);margin-bottom:34px;background:#fff}
+.clockbox>div{padding:18px 20px;border-right:3px solid var(--ink)}
+.clockbox>div:last-child{border-right:0}
+.clockbox .k{font-family:var(--advis);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+.clockbox .v{font-family:var(--sign);font-size:clamp(40px,5vw,64px);line-height:.95;text-transform:uppercase;margin:6px 0 4px;font-variant-numeric:tabular-nums}
+.clockbox .v.o{color:var(--orange)}
+.clockbox .s{font-family:var(--advis);font-size:13px;line-height:1.45}
+.tracks{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:3px solid var(--ink)}
+.track{padding:22px 22px 26px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.track:last-child{border-right:0}
+.track .hd{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.track .rd{font-size:22px}
+.track h3{font-family:var(--sign);font-weight:400;font-size:32px;line-height:1;text-transform:uppercase;margin:0}
+.track .speed{font-family:var(--advis);font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-bottom:10px}
+.track p{font-size:15.5px}
+.track ul{margin:0;padding:0;list-style:none;font-family:var(--advis);font-size:13.5px;line-height:1.5}
+.track li{padding:6px 0;border-top:1px dashed var(--cement)}
+.calc{margin-top:14px;background:var(--ink);color:var(--cream);padding:14px}
+.calc label{display:block;font-family:var(--advis);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.calc input{width:100%;font-family:var(--data);font-size:20px;padding:6px 8px;border:0;background:var(--cream);color:var(--ink)}
+.calc .out{font-family:var(--advis);font-size:13px;margin-top:10px;line-height:1.45}
+.calc .out b{font-family:var(--glyph);font-size:22px;font-weight:400}
+.skip{margin-top:34px;display:grid;grid-template-columns:200px 1fr;gap:0;border-top:3px solid var(--ink)}
+.skip>div{padding:12px 0;border-bottom:1px solid var(--ink);font-family:var(--advis);font-size:14px}
+.skip>div:nth-child(odd){font-family:var(--col);font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-size:16px;padding-right:14px}
+.skip s{text-decoration-thickness:3px;text-decoration-color:var(--orange)}
+.weeks{margin-top:38px}
+.weeks h3,.sub-h{font-family:var(--sign);font-weight:400;text-transform:uppercase;font-size:34px;margin:0 0 14px;line-height:1}
+
+/* ---------- station stop line (numbered steps) ---------- */
+.stops{list-style:none;margin:0;padding:0;position:relative}
+.stops::before{content:"";position:absolute;left:22px;top:18px;bottom:18px;width:10px;background:var(--ink)}
+.stops.y::before{background:var(--yellow)} .stops.o::before{background:var(--orange)}
+.stops li{position:relative;display:grid;grid-template-columns:54px 1fr;gap:18px;padding:12px 0}
+.stops .dot{width:54px;height:54px;border-radius:50%;background:var(--cream);border:6px solid var(--ink);display:grid;place-items:center;font-family:var(--glyph);font-size:20px;position:relative;z-index:1}
+.stops li.transfer .dot{background:var(--ink);color:var(--yellow)}
+.stops .when{font-family:var(--advis);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#555}
+.stops .what{font-family:var(--col);font-weight:600;font-size:23px;text-transform:uppercase;line-height:1.1;margin:2px 0 4px;letter-spacing:.01em}
+.stops .why{font-family:var(--advis);font-size:14px;line-height:1.5;max-width:70ch}
+
+/* ---------- pitch ---------- */
+.pitch-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:40px;align-items:start}
+.receipts{background:var(--ink);color:var(--cream);padding:26px 26px 22px}
+.receipts .k{font-family:var(--advis);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:700}
+.receipts .big{font-family:var(--glyph);font-size:clamp(56px,7vw,92px);line-height:.95;margin:10px 0 4px;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.receipts dl{display:grid;grid-template-columns:1fr auto;margin:16px 0 0;font-family:var(--data);font-size:14px}
+.receipts dt,.receipts dd{margin:0;padding:8px 0;border-top:1px solid #333}
+.receipts dd{text-align:right;font-weight:600}
+.license{border:3px solid var(--ink);margin-top:22px;background:#fff}
+.license .th{background:var(--ink);color:var(--cream);font-family:var(--col);font-weight:600;text-transform:uppercase;letter-spacing:.08em;padding:8px 14px;font-size:15px}
+.license dl{display:grid;grid-template-columns:130px 1fr;margin:0;font-family:var(--data);font-size:14px}
+.license dt,.license dd{margin:0;padding:9px 14px;border-top:1px solid var(--soft)}
+.license dt{font-weight:600;text-transform:uppercase;font-size:12px;letter-spacing:.06em;padding-top:11px}
+.legal{margin-top:26px;background:var(--orange);color:var(--ink);padding:18px 20px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+.legal .rd{font-size:26px;--c:var(--ink);--t:var(--orange)}
+.legal b{font-family:var(--sign);font-weight:400;text-transform:uppercase;font-size:26px;display:block;line-height:1;margin-bottom:6px}
+.legal p{font-family:var(--advis);font-size:14px;margin:0}
+.myth{font-family:var(--advis);font-size:14px;border-left:10px solid var(--ink);padding:6px 0 6px 14px;margin:22px 0}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--col);font-weight:600;text-transform:uppercase;letter-spacing:.06em;font-size:16px;background:var(--ink);color:var(--cream);border:0;padding:10px 16px;cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--royal)}
+.btn.y{background:var(--yellow);color:var(--ink)} .btn.y:hover{background:var(--ink);color:var(--yellow)}
+.btn:disabled{opacity:.5;cursor:wait}
+
+/* ---------- other trains ---------- */
+.board{background:var(--ink);color:var(--cream);font-family:var(--data)}
+.board .row{display:grid;grid-template-columns:52px 1.1fr 1fr 1.5fr 1.2fr;gap:14px;padding:14px 18px;border-bottom:1px solid #2c2c2c;align-items:start;font-size:14px}
+.board .row.h{font-family:var(--col);font-weight:500;text-transform:uppercase;letter-spacing:.1em;font-size:12px;color:var(--yellow);padding-top:12px;padding-bottom:12px}
+.board .name{font-family:var(--col);font-weight:600;font-size:19px;text-transform:uppercase;line-height:1.1}
+.board .rd{font-size:18px}
+.board .fit{font-family:var(--advis);font-size:13px}
+.board .row.closed .name{color:var(--cement)}
+
+/* ---------- finder ---------- */
+.finder-bar{display:flex;flex-wrap:wrap;gap:12px;align-items:end;background:var(--ink);color:var(--cream);padding:14px 16px}
+.finder-bar label{font-family:var(--advis);font-size:11px;letter-spacing:.12em;text-transform:uppercase;display:flex;flex-direction:column;gap:5px}
+.finder-bar select,.finder-bar input{font-family:var(--data);font-size:15px;padding:7px 8px;border:0;background:var(--cream);color:var(--ink);min-width:150px}
+.finder-bar .spacer{flex:1}
+.status{font-family:var(--advis);font-size:12px;letter-spacing:.06em;padding:10px 0;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.status b{font-family:var(--glyph);font-weight:400;font-size:15px}
+.stat3{display:grid;grid-template-columns:repeat(4,1fr);border:3px solid var(--ink);border-bottom:0;background:#fff}
+.stat3>div{padding:14px 16px;border-right:1px solid var(--ink)}
+.stat3>div:last-child{border-right:0}
+.stat3 .v{font-family:var(--glyph);font-size:clamp(30px,3.6vw,46px);line-height:1;font-variant-numeric:tabular-nums}
+.stat3 .k{font-family:var(--advis);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-top:6px}
+.finder{display:grid;grid-template-columns:1fr 1fr;border:3px solid var(--ink);height:640px}
+#map{height:100%;border-right:3px solid var(--ink);background:#ddd}
+#map .osm{filter:grayscale(1) contrast(.9) brightness(1.06) sepia(.12)}
+.leaflet-container{font-family:var(--advis)}
+.list{overflow:auto;background:#fff}
+table{width:100%;border-collapse:collapse;font-family:var(--data);font-size:13.5px}
+thead th{position:sticky;top:0;background:var(--yellow);font-family:var(--col);font-weight:600;text-transform:uppercase;letter-spacing:.06em;font-size:12.5px;text-align:left;padding:9px 10px;border-bottom:3px solid var(--ink);z-index:2}
+tbody td{padding:9px 10px;border-bottom:1px solid var(--soft);vertical-align:middle}
+tbody tr{cursor:pointer}
+tbody tr:hover,tbody tr.on{background:var(--cream)}
+td.addr{font-weight:600}
+td.rank{font-family:var(--glyph);font-size:14px;color:#777;width:36px}
+.strip{display:flex;gap:3px}
+.strip i{display:block;width:11px;height:14px;background:var(--soft)}
+.strip i.d{background:var(--ink)} .strip i.n{background:transparent;border:1px dashed var(--cement)}
+.cor{font-family:var(--advis);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:1px 6px;border:1px solid var(--ink);white-space:nowrap}
+.cor.avenue{background:var(--ink);color:var(--yellow)}
+.dq{margin-top:14px;font-family:var(--advis);font-size:12.5px;line-height:1.6;color:#333}
+.dq b{font-weight:700}
+
+/* station card */
+.card-wrap{position:fixed;inset:0;background:rgba(12,12,12,.72);z-index:1000;display:none;align-items:center;justify-content:center;padding:18px}
+.card-wrap.on{display:flex}
+.scard{background:var(--cream);width:min(640px,100%);max-height:92vh;overflow:auto;border:4px solid var(--ink)}
+.scard .top{background:var(--ink);color:var(--cream);padding:16px 18px;display:flex;justify-content:space-between;gap:12px;align-items:start}
+.scard .top small{font-family:var(--advis);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow)}
+.scard .top h3{font-family:var(--sign);font-weight:400;font-size:clamp(34px,6vw,50px);line-height:.95;text-transform:uppercase;margin:4px 0 0}
+.scard .x{background:var(--yellow);border:0;font-family:var(--glyph);font-size:18px;width:40px;height:40px;cursor:pointer;flex:none}
+.scard .body{padding:18px}
+.scard dl{display:grid;grid-template-columns:150px 1fr;margin:0 0 16px;font-family:var(--data);font-size:14px}
+.scard dt,.scard dd{margin:0;padding:8px 0;border-top:1px solid var(--soft)}
+.scard dt{font-family:var(--advis);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding-top:10px}
+.yrs{display:flex;gap:4px;flex-wrap:wrap}
+.yrs span{font-family:var(--data);font-size:12px;padding:3px 6px;border:1px solid var(--ink)}
+.yrs span.d{background:var(--ink);color:var(--yellow)}
+.yrs span.n{border-style:dashed;color:#888;border-color:var(--cement)}
+.links{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 18px}
+.verify{border:3px solid var(--orange);background:#fff}
+.verify .th{background:var(--orange);font-family:var(--col);font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:8px 12px;font-size:15px}
+.verify label{display:flex;gap:10px;padding:10px 12px;border-top:1px solid var(--soft);font-family:var(--advis);font-size:14px;cursor:pointer;align-items:start}
+.verify input{width:20px;height:20px;accent-color:var(--ink);flex:none;margin-top:1px}
+.verify .note{font-family:var(--advis);font-size:11.5px;padding:8px 12px;color:#555;border-top:1px solid var(--soft)}
+
+/* ---------- targets ---------- */
+.tgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.tcard{background:#fff;border:3px solid var(--ink);display:flex;flex-direction:column}
+.tcard .band{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;background:var(--ink);color:var(--cream);font-family:var(--advis);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.tcard.hit .band{background:var(--yellow);color:var(--ink)}
+.tcard.drop{opacity:.7}
+.tcard.drop .band{background:var(--cement);color:var(--ink)}
+.tcard .in{padding:16px 16px 18px;flex:1}
+.tcard h3{font-family:var(--sign);font-weight:400;text-transform:uppercase;font-size:40px;line-height:.95;margin:0 0 4px}
+.tcard.drop h3{text-decoration:line-through;text-decoration-thickness:4px;text-decoration-color:var(--orange)}
+.tcard .where{font-family:var(--advis);font-size:13px;margin-bottom:12px}
+.tcard ul{margin:0 0 12px;padding:0;list-style:none;font-size:15px}
+.tcard li{padding:5px 0 5px 18px;border-top:1px dashed var(--soft);position:relative}
+.tcard li::before{content:"";position:absolute;left:0;top:13px;width:8px;height:8px;border-radius:50%;background:var(--ink)}
+.tcard .reg{font-family:var(--advis);font-size:13px;background:var(--cream);padding:10px 12px;margin-bottom:12px}
+.tcard .foot{display:flex;gap:8px;flex-wrap:wrap;padding:0 16px 16px}
+.btn.sm{font-size:13px;padding:7px 11px}
+
+/* ---------- footer ---------- */
+footer{background:var(--ink);color:var(--cream);margin-top:100px;padding:0 0 60px}
+footer .in{max-width:1160px;margin:0 auto;padding:40px 24px 0;display:grid;grid-template-columns:1fr 1fr;gap:40px;font-family:var(--advis);font-size:13px;line-height:1.7}
+footer h4{font-family:var(--col);font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--yellow);margin:0 0 10px;font-size:15px}
+footer ul{margin:0;padding-left:18px}
+footer a{color:var(--cream)}
+
+/* ---------- reveal ---------- */
+@media (prefers-reduced-motion:no-preference){
+  .hero h1,.hero .dek,.hero .kick,.sig{animation:up .7s cubic-bezier(.2,.7,.1,1) both}
+  .hero .kick{animation-delay:.05s}.hero h1{animation-delay:.15s}.hero .dek{animation-delay:.3s}.sig{animation-delay:.45s}
+  .hazard.run{background-size:45.25px 45.25px;animation:haz 1.6s linear infinite}
+  @keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  @keyframes haz{to{background-position:45.25px 0}}
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr}.sig{max-width:200px;aspect-ratio:auto;padding:26px}
+  .tracks,.clockbox,.pitch-grid,.tgrid,footer .in{grid-template-columns:1fr}
+  .track,.clockbox>div{border-right:0}
+  .clockbox>div{border-bottom:3px solid var(--ink)} .clockbox>div:last-child{border-bottom:0}
+  .finder{grid-template-columns:1fr;height:auto}
+  #map{height:360px;border-right:0;border-bottom:3px solid var(--ink)}
+  .list{max-height:520px}
+  .stat3{grid-template-columns:repeat(2,1fr)} .stat3>div{border-bottom:1px solid var(--ink)}
+  .board .row{grid-template-columns:40px 1fr;gap:6px 12px}
+  .board .row>*:nth-child(n+3){grid-column:2}
+  .board .row.h{display:none}
+  .skip{grid-template-columns:1fr}.skip>div:nth-child(odd){border-bottom:0;padding-bottom:0}
+  .col-hide{display:none}
+}
+@media (max-width:520px){
+  .wrap,.adv-body,.hero{padding-left:16px;padding-right:16px}
+  .mast .bar{padding:10px 16px;font-size:10.5px}
+  .scard dl,.license dl{grid-template-columns:1fr}.scard dd,.license dd{border-top:0;padding-top:0}
+  .stops li{grid-template-columns:44px 1fr;gap:12px}.stops .dot{width:44px;height:44px;border-width:5px;font-size:16px}.stops::before{left:17px}
+}
+
+/* ---------- print: the pitch only, for landlords ---------- */
+@media print{
+  @page{margin:14mm}
+  html,body{background:#fff}
+  body *{visibility:hidden}
+  #pitch,#pitch *{visibility:visible}
+  #pitch{position:absolute;left:0;top:0;width:100%;margin:0}
+  #pitch .no-print{display:none}
+  .receipts,.legal,.adv-head{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="bar"><span><b>Service advisory</b> · Platform's Edge · PJ O'Rourke II</span><span class="clock" id="clock">NYC --:--</span></div>
+  <div class="hazard run"></div>
+  <div class="hero">
+    <div>
+      <div class="kick"><span class="tag">Planned work</span><span>East Village · Lower East Side · effective now</span></div>
+      <h1>Keeping<br>the lights<br><span class="y">on</span></h1>
+      <p class="dek">Dark storefronts are stations. The owner is the line. The deal is the transfer. This page is the pitch, the list of doors that have been dark the longest, and the express route to a register by Friday, November 20.</p>
+    </div>
+    <div class="sig" aria-label="Placeholder for PJ's signature artwork"><div><b>PJ</b>Signature artwork<br>goes here</div></div>
+  </div>
+  <nav class="lines" aria-label="Sections">
+    <a href="#express"><span class="rd o">X</span>Express</a>
+    <a href="#pitch"><span class="rd y">P</span>The pitch</a>
+    <a href="#trains"><span class="rd c">L</span>Other trains</a>
+    <a href="#finder"><span class="rd r">F</span>The finder</a>
+    <a href="#targets"><span class="rd g">T</span>Targets</a>
+    <a href="#stops"><span class="rd">S</span>Station stops</a>
+  </nav>
+</header>
+
+<!-- ================= EXPRESS ================= -->
+<section class="adv" id="express">
+  <div class="adv-head orange"><div class="in"><span class="rd dia"><span>X</span></span><div class="t"><small>Express service · skips the panels</small><h2>A register by November 20</h2></div></div></div>
+  <div class="adv-body">
+    <p class="lede">Nobody is going to pick PJ. The programs run panels, the panels run cycles, and the next good cycle is 2027. So we stop applying and start calling. Three tracks run at the same time. Whichever one hands over keys first wins.</p>
+
+    <div class="clockbox">
+      <div><div class="k">Doors open</div><div class="v">Fri Nov 20</div><div class="s">One week before Black Friday. Run it through Sunday, January 3.</div></div>
+      <div><div class="k">Hard deadline</div><div class="v o" id="cd-tax">Oct 31</div><div class="s">New York wants the sales tax Certificate of Authority filed 20 days before the first sale. File this week. It comes by mail.</div></div>
+      <div><div class="k">Days left</div><div class="v" id="cd-open">--</div><div class="s">to open. Signed paper by October 16 or we switch to Track 2.</div></div>
+    </div>
+
+    <div class="tracks">
+      <div class="track">
+        <div class="hd"><span class="rd o">1</span><h3>Call the sign</h3></div>
+        <div class="speed">Keys in 2 to 4 weeks · no fee</div>
+        <p>Walk Avenues A, B, C and First with the list below. Every dark door with a sign has a phone number. That number is the owner's own agent. Not a panel. Not a program.</p>
+        <ul>
+          <li>Offer: a six week holiday license, percent of gross, 30-day out both ways.</li>
+          <li>PJ brings insurance, the receipts, and the art. The owner brings a key.</li>
+          <li>Ask every broker the same question: what else of yours is dark?</li>
+        </ul>
+      </div>
+      <div class="track">
+        <div class="hd"><span class="rd r">2</span><h3>Book it</h3></div>
+        <div class="speed">Keys in days · costs rent</div>
+        <p>Short-term storefront marketplaces list East Village spaces by the day or week. You pay, you get the room. No selection panel. Terms are agreed with the space owner directly.</p>
+        <ul>
+          <li><a href="https://www.thestorefront.com/search/new-york/east-village/retail" target="_blank" rel="noopener">Storefront, East Village</a> · <a href="https://xnomad.co/s/new-york/east-village" target="_blank" rel="noopener">xNomad</a> · <a href="https://www.popshop.com/spaces?q=new+york" target="_blank" rel="noopener">Popshop</a></li>
+          <li>This is the floor. It guarantees November 20 if the other two stall.</li>
+        </ul>
+        <div class="calc">
+          <label for="wk">Space cost per week, dollars</label>
+          <input id="wk" type="number" min="0" step="100" value="700" inputmode="numeric">
+          <div class="out" id="calc-out"></div>
+        </div>
+      </div>
+      <div class="track">
+        <div class="hd"><span class="rd g">3</span><h3>Shop in a shop</h3></div>
+        <div class="speed">Keys this month · percent of gross</div>
+        <p>A wall, a rack and a register inside a store that is already open on the avenue. The lights are already on. The foot traffic is already in the door.</p>
+        <ul>
+          <li>Pitch store owners PJ already knows first. They have seen the cart.</li>
+          <li>The store's own lease may not allow it. Ask them to check before anything is signed.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="skip">
+      <div><s>RE:Store</s></div><div>Applications closed February 6, 2026. 360 plus applied for 7 spots. Next window likely early 2027. <span class="unc">Unconfirmed</span></div>
+      <div><s>Storefront Startup</s></div><div>Rent-free, but a panel picks, and priority goes to set neighborhoods and owner groups. The program site, storefrontstartup.org, did not load on September 17, 2026.</div>
+      <div><s>MTA vacant units</s></div><div>Nonprofits and arts orgs only. Needs a middleman by design.</div>
+    </div>
+
+    <div class="weeks">
+      <h3>The schedule</h3>
+      <ol class="stops o">
+        <li><span class="dot">1</span><div><div class="when">Week of Sep 21</div><div class="what">Paper first</div><div class="why">File the sales tax certificate. Confirm the entity that signs. Get a general liability insurance quote; owners will ask to be named on the certificate. Lawyer's fifteen minutes on the license.</div></div></li>
+        <li><span class="dot">2</span><div><div class="when">Sep 28 to Oct 11</div><div class="what">Walk and dial</div><div class="why">Walk the avenue list. Photograph every sign. Call twenty numbers. Book three viewings. Price the marketplace listings as the backup.</div></div></li>
+        <li class="transfer"><span class="dot">T</span><div><div class="when">By Fri Oct 16</div><div class="what">Transfer point</div><div class="why">Signed license from Track 1 or 3? Keep going. Nothing signed? Book Track 2 that day. No second-guessing.</div></div></li>
+        <li><span class="dot">3</span><div><div class="when">Oct 19 to Nov 15</div><div class="what">Fit it like the cart</div><div class="why">Racks, light, register, signage. Nothing that counts as construction. Turn on Square item tracking before the first sale in the room.</div></div></li>
+        <li><span class="dot">4</span><div><div class="when">Fri Nov 20</div><div class="what">Doors open</div><div class="why">Run through January 3. Every week of receipts is the pitch for the next door.</div></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PITCH ================= -->
+<section class="adv" id="pitch">
+  <div class="adv-head"><div class="in"><span class="rd">P</span><div class="t"><small>For the owner · print this part</small><h2>The pitch, in plain terms</h2></div></div></div>
+  <div class="adv-body">
+    <div class="pitch-grid">
+      <div>
+        <ol class="stops y">
+          <li><span class="dot">1</span><div><div class="what">Dark costs you every month</div><div class="why">Every month a storefront sits dark, it costs the owner. An artist in it costs less than the empty room does.</div></div></li>
+          <li><span class="dot">2</span><div><div class="what">We have seen this movie</div><div class="why">In the 80s and 90s artists took the dead spaces, made the block worth something, and got priced out by the value they made. They had no paper. This is the paper.</div></div></li>
+          <li><span class="dot">3</span><div><div class="what">Your ask stays on paper</div><div class="why">The space reads occupied. The asking rent is never touched, because there is no rent. You keep the right to hand the space to a full tenant on short notice.</div></div></li>
+          <li class="transfer"><span class="dot">$</span><div><div class="what">The receipts walk in first</div><div class="why">Nobody else asking for your space shows up with nine weeks of real sales. PJ does.</div></div></li>
+        </ol>
+        <div class="myth"><b>Not on the table:</b> the idea that owners get a tax break for keeping space empty. That is a myth. We do not bring it up.</div>
+      </div>
+      <div>
+        <div class="receipts">
+          <div class="k">Square receipts · from the cart</div>
+          <div class="big">$32,212</div>
+          <div style="font-family:var(--advis);font-size:13px">gross, July 1 to September 3, 2026</div>
+          <dl><dt>Transactions</dt><dd>324</dd><dt>Average sale</dt><dd>about $99</dd><dt>Per week</dt><dd>about $3,470</dd><dt>Selling since</dt><dd>2012</dd></dl>
+        </div>
+        <div class="license">
+          <div class="th">The instrument</div>
+          <dl>
+            <dt>What</dt><dd>A license. Not a lease.</dd>
+            <dt>Term</dt><dd>Three months</dd>
+            <dt>Rent</dt><dd>None stated</dd>
+            <dt>Owner gets</dt><dd>A percent of gross</dd>
+            <dt>Out</dt><dd>30 days, either side</dd>
+            <dt>PJ keeps</dt><dd>The keys, the bank account, the art and the IP</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="legal">
+      <span class="rd">!</span>
+      <div><b>Before the first pitch goes out</b><p>A license that reads like a lease can create a leasehold, and that hands the owner the exact problem we promised to take away. A real estate lawyer reads the one-pager first. Fifteen minutes.</p></div>
+    </div>
+    <p class="no-print" style="margin-top:22px"><button class="btn" id="print">Print the pitch for an owner</button></p>
+  </div>
+</section>
+
+<!-- ================= OTHER TRAINS ================= -->
+<section class="adv" id="trains">
+  <div class="adv-head ink"><div class="in"><span class="rd c">L</span><div class="t"><small>Local service · every stop has a panel</small><h2>Other trains on this line</h2></div></div></div>
+  <div class="adv-body">
+    <p class="lede">These programs already run this play. Each one puts a selection panel between PJ and the door. Useful as landlord language. Not the route.</p>
+    <div class="board" role="table">
+      <div class="row h" role="row"><span></span><span>Program</span><span>Run by</span><span>What it gives</span><span>PJ fit</span></div>
+      <div class="row" role="row"><span class="rd y">1</span><span class="name">RE:Store</span><span>Downtown Alliance, Lower Manhattan business district</span><span>Free three month pop-up storefront. 360 plus applications for 7 spots. Closed Feb 6, 2026.</span><span class="fit">Best fit. Next window likely early 2027. <span class="unc">Unconfirmed</span></span></div>
+      <div class="row" role="row"><span class="rd y">2</span><span class="name">Storefront Startup</span><span>Chashama with NYC Small Business Services</span><span>Rent-free storefronts for small businesses and makers. Rolling. $250 refundable deposit.</span><span class="fit">Second best. Closest to direct, still a panel.</span></div>
+      <div class="row" role="row"><span class="rd c">3</span><span class="name">Chashama core</span><span>Chashama</span><span>Free or cheap artist space. $13M a year in space.</span><span class="fit">Studio, not a register.</span></div>
+      <div class="row" role="row"><span class="rd c">4</span><span class="name">Art on the Ave NYC</span><span>Nonprofit</span><span>Storefront galleries and residencies. Works with street artists.</span><span class="fit">Gallery, not a register.</span></div>
+      <div class="row" role="row"><span class="rd c">5</span><span class="name">Create in Place</span><span>NYC, across agencies</span><span>City-owned space through the two nonprofits above.</span><span class="fit">No direct application.</span></div>
+      <div class="row" role="row"><span class="rd c">6</span><span class="name">MTA Vacant Unit Activation</span><span>MTA Real Estate</span><span>No rent, license agreement.</span><span class="fit">Nonprofit or arts org only. Needs an intermediary.</span></div>
+      <div class="row" role="row"><span class="rd c">7</span><span class="name">RPA Vacant Storefront Toolkit</span><span>Regional Plan Association</span><span>The cookbook every business district reads.</span><span class="fit">Where the owner language comes from.</span></div>
+    </div>
+    <p class="dq">Not checked this pass: No Longer Empty, Hell's Kitchen Storefront Revitalization Initiative, any Brooklyn district program. <span class="unc">Status unknown</span></p>
+  </div>
+</section>
+
+<!-- ================= FINDER ================= -->
+<section class="adv" id="finder">
+  <div class="adv-head" style="background:var(--royal);color:var(--cream)"><div class="in"><span class="rd y">F</span><div class="t"><small style="color:var(--yellow)">City registry · Local Law 157 of 2019</small><h2>The finder</h2></div></div></div>
+  <div class="adv-body">
+    <p class="lede">Every ground floor storefront owner in the city has to tell the Department of Finance whether the space was empty on December 31. We pulled every filing for the East Village and the Lower East Side and counted how many years each door said yes.</p>
+    <div class="stat3" id="stats">
+      <div><div class="v" id="st-rows">--</div><div class="k">Filings pulled</div></div>
+      <div><div class="v" id="st-3">--</div><div class="k">Doors dark 3+ years</div></div>
+      <div><div class="v" id="st-av">--</div><div class="k">Of those, on the avenues</div></div>
+      <div><div class="v" id="st-max">--</div><div class="k">Most years dark</div></div>
+    </div>
+    <div class="finder-bar">
+      <label>Corridor<select id="f-cor"><option value="avenue">1st Ave, A, B, C</option><option value="corridor" selected>Avenues plus cross streets</option><option value="all">Everything pulled</option></select></label>
+      <label>Years dark, at least<select id="f-min"><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option></select></label>
+      <label>Neighborhood<select id="f-nb"><option value="">Both</option><option>East Village</option><option>Lower East Side</option></select></label>
+      <label>Street or number<input id="f-q" type="search" placeholder="Avenue A"></label>
+      <span class="spacer"></span>
+      <button class="btn y" id="refresh">Pull live from the city</button>
+    </div>
+    <div class="status" id="status">Loading the snapshot.</div>
+    <div class="finder">
+      <div id="map" role="region" aria-label="Map of dark storefronts"></div>
+      <div class="list"><table><thead><tr><th>#</th><th>Door</th><th>Dark</th><th class="col-hide">Filings</th><th class="col-hide">Corridor</th></tr></thead><tbody id="rows"></tbody></table></div>
+    </div>
+    <div class="dq">
+      <b>Read this before you call anyone.</b> The registry says what the owner reported, not what is true today. Walk it.
+      Owner names are <b>not</b> in this data; ACRIS has them. The 2025 filings look incomplete in the city feed so far, so a door with no 2025 filing is shown as a dashed box, not as occupied.
+      Yes values come in as YES and Y, both counted. Lots that ever reported construction are dropped. Doors are grouped by tax lot and street address; a building with two storefronts on one address counts once.
+      <span class="unc">Street names in the feed are messy; a few doors may split or merge</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TARGETS ================= -->
+<section class="adv" id="targets">
+  <div class="adv-head" style="background:var(--olive);color:var(--cream)"><div class="in"><span class="rd y">T</span><div class="t"><small style="color:var(--yellow)">First station cards · every one needs a walk</small><h2>The target list</h2></div></div></div>
+  <div class="adv-body">
+    <p class="lede">These came from the news before the registry pull. Where the registry agrees, the card says so.</p>
+    <div class="tgrid" id="tgrid"></div>
+  </div>
+</section>
+
+<!-- ================= STOPS ================= -->
+<section class="adv" id="stops">
+  <div class="adv-head ink"><div class="in"><span class="rd y">S</span><div class="t"><small>PJ's checklist · in order</small><h2>Station stops</h2></div></div></div>
+  <div class="adv-body">
+    <ol class="stops">
+      <li><span class="dot">1</span><div><div class="what">Confirm the entity that signs</div><div class="why">The name on the license, the insurance, the tax certificate and the bank account should all match.</div></div></li>
+      <li><span class="dot">2</span><div><div class="what">File the sales tax certificate</div><div class="why">20 days before the first sale in a room. Oct 31 at the latest for Nov 20.</div></div></li>
+      <li><span class="dot">3</span><div><div class="what">Turn on item tracking in Square</div><div class="why">Every sale is still "Custom Amount." An owner will ask what sold. Right now nobody can say.</div></div></li>
+      <li><span class="dot">4</span><div><div class="what">Walk the list</div><div class="why">Use the finder. Avenues first. Photograph every sign and every phone number.</div></div></li>
+      <li><span class="dot">5</span><div><div class="what">ACRIS the top five</div><div class="why">Get the real owner, not the LLC name on the door. The filing may be older than the last sale.</div></div></li>
+      <li><span class="dot">6</span><div><div class="what">Lawyer's fifteen minutes</div><div class="why">On the license one-pager, before it reaches an owner.</div></div></li>
+      <li class="transfer"><span class="dot">7</span><div><div class="what">First pitch: 28 Avenue A</div><div class="why">Dark in every city filing since 2019. Too big for one maker; pitch the front of the room or bring a second.</div></div></li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <div class="hazard"></div>
+  <div class="in">
+    <div>
+      <h4>Where this comes from</h4>
+      <ul>
+        <li><a href="https://data.cityofnewyork.us/City-Government/Storefronts-Reported-Vacant-or-Not/92iy-9c3n" target="_blank" rel="noopener">NYC Open Data, Storefronts Reported Vacant or Not</a>, Department of Finance, dataset 92iy-9c3n</li>
+        <li>NYC Comptroller, "Who's Minding the Storefronts?", June 4, 2026. About 15,700 vacant storefronts citywide. <span class="unc">Unconfirmed if its data is downloadable</span></li>
+        <li><a href="https://www.tax.ny.gov/bus/st/register.htm" target="_blank" rel="noopener">NYS Tax Department, register as a sales tax vendor</a></li>
+        <li>EV Grieve, 2022 to 2026, for the target cards</li>
+        <li>Square export, PJ O'Rourke II, July 1 to September 3, 2026</li>
+      </ul>
+    </div>
+    <div>
+      <h4>What this is</h4>
+      <p>A working draft by Feldt Design for Platform's Edge. Not legal advice and not an offer. Anything marked in orange has not been checked. Checkmarks on station cards are saved only in the browser that ticked them.</p>
+      <p id="snap-note"></p>
+    </div>
+  </div>
+</footer>
+
+<div class="card-wrap" id="cardwrap" role="dialog" aria-modal="true" aria-labelledby="sc-title">
+  <div class="scard">
+    <div class="top"><div><small id="sc-kick">Station card</small><h3 id="sc-title">--</h3></div><button class="x" id="sc-x" aria-label="Close">X</button></div>
+    <div class="body" id="sc-body"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="pipeline.js"></script>
+<script>
+(() => {
+const $ = s => document.querySelector(s);
+const fmt = n => n.toLocaleString("en-US");
+const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const title = s => String(s || "").toLowerCase().replace(/\b(\d+) avenue\b/, (m, d) => d === "1" ? "First Ave" : d + " Ave").replace(/\bavenue\b/, "Ave").replace(/\beast\b/, "E").replace(/\b(\d+) street\b/, "$1th St").replace(/\bstreet\b/, "St").replace(/\b\w/g, c => c.toUpperCase()).replace(/\b(1)th\b/,"1st").replace(/\b(2)th\b/,"2nd").replace(/\b(3)th\b/,"3rd").replace(/\b11st\b/,"11th").replace(/\b12nd\b/,"12th").replace(/\b13rd\b/,"13th");
+
+/* clock + countdown */
+const tz = {timeZone:"America/New_York"};
+function tick(){
+  $("#clock").textContent = "NYC " + new Date().toLocaleTimeString("en-US", {...tz, hour:"numeric", minute:"2-digit"});
+  const now = new Date(new Date().toLocaleString("en-US", tz)); now.setHours(0,0,0,0);
+  const open = new Date(2026, 10, 20);
+  const d = Math.round((open - now) / 864e5);
+  $("#cd-open").textContent = d > 0 ? d : (d === 0 ? "Today" : "Open");
+}
+tick(); setInterval(tick, 30000);
+
+/* calculator: weekly space cost against the cart's run rate */
+const WEEK = 32212 / (65 / 7);
+function calc(){
+  const c = Math.max(0, +$("#wk").value || 0);
+  const pct = c / WEEK * 100;
+  let say = pct <= 20 ? "Runs. Room left for light, racks and a bad week." : pct <= 35 ? "Tight. Works only if the room sells better than the cart." : "No. The room would eat the receipts.";
+  $("#calc-out").innerHTML = `<b>${Math.round(pct)}%</b> of about $${fmt(Math.round(WEEK / 10) * 10)} a week at cart pace.<br>${say}<br><span style="color:var(--cement)">Rule of thumb, not a forecast. A room may sell more or less than the cart. <span class="unc">Unconfirmed</span></span>`;
+}
+$("#wk").addEventListener("input", calc); calc();
+
+$("#print").addEventListener("click", () => window.print());
+
+/* ---------- finder ---------- */
+let DATA = null, YEARS = [], sel = null, markers = new Map();
+const map = L.map("map", {scrollWheelZoom:false, zoomControl:true}).setView([40.7235, -73.9840], 15);
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {maxZoom:19, className:"osm", attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+const layer = L.layerGroup().addTo(map);
+const colorFor = n => n >= 6 ? "#0C0C0C" : n >= 5 ? "#F0611F" : n >= 4 ? "#1E4FD6" : n >= 3 ? "#5F6B3C" : "#9B9B95";
+
+function filtered(){
+  const cor = $("#f-cor").value, min = +$("#f-min").value, nb = $("#f-nb").value, q = $("#f-q").value.trim().toUpperCase();
+  return DATA.lots.filter(l =>
+    l.yearsDark >= min &&
+    (cor === "all" || (cor === "avenue" ? l.corridor === "avenue" : !!l.corridor)) &&
+    (!nb || l.nbhd === nb) &&
+    (!q || l.address.includes(q) || title(l.address).toUpperCase().includes(q)));
+}
+
+function strip(l){
+  return '<span class="strip">' + YEARS.map(y => `<i class="${l.darkYears.includes(y) ? "d" : l.filedYears.includes(y) ? "" : "n"}" title="${y}"></i>`).join("") + "</span>";
+}
+
+function render(){
+  const list = filtered();
+  const all3 = DATA.lots.filter(l => l.yearsDark >= 3);
+  $("#st-rows").textContent = fmt(DATA.rowCount);
+  $("#st-3").textContent = fmt(all3.length);
+  $("#st-av").textContent = fmt(all3.filter(l => l.corridor === "avenue").length);
+  $("#st-max").textContent = Math.max(...DATA.lots.map(l => l.yearsDark)) + " of " + YEARS.length;
+
+  $("#rows").innerHTML = list.slice(0, 300).map((l, i) =>
+    `<tr data-id="${esc(l.id)}"><td class="rank">${i + 1}</td><td class="addr">${esc(title(l.address))}<div style="font-weight:400;font-size:11.5px;color:#666">${esc(l.nbhd)}</div></td><td>${strip(l)}</td><td class="col-hide">${l.yearsDark} of ${l.yearsFiled}</td><td class="col-hide">${l.corridor ? `<span class="cor ${l.corridor}">${l.corridor === "avenue" ? "Avenue" : "Cross"}</span>` : ""}</td></tr>`).join("")
+    || `<tr><td colspan="5" style="padding:20px;font-family:var(--advis)">No doors match. Loosen a filter.</td></tr>`;
+
+  layer.clearLayers(); markers.clear();
+  const pts = [];
+  for (const l of list) {
+    if (!l.lat) continue;
+    const m = L.circleMarker([l.lat, l.lng], {radius: 4 + l.yearsDark * 1.3, color:"#0C0C0C", weight:1.5, fillColor: colorFor(l.yearsDark), fillOpacity:.9})
+      .bindTooltip(`${title(l.address)} · dark ${l.yearsDark} of ${l.yearsFiled}`).on("click", () => openCard(l));
+    m.addTo(layer); markers.set(l.id, m); pts.push([l.lat, l.lng]);
+  }
+  $("#status").innerHTML = `<b>${fmt(list.length)}</b> doors shown${list.length > 300 ? " (table shows top 300)" : ""} · ${list.filter(l => !l.lat).length} have no map point · source pulled <b>${esc(DATA.pulled)}</b>${DATA.live ? ' <span class="ok">Live</span>' : " · snapshot"} · legend: <span class="rd" style="font-size:9px;--c:#0C0C0C"></span> 6+ <span class="rd o" style="font-size:9px"></span> 5 <span class="rd r" style="font-size:9px"></span> 4 <span class="rd g" style="font-size:9px"></span> 3 years`;
+}
+
+["#f-cor","#f-min","#f-nb"].forEach(s => $(s).addEventListener("change", render));
+$("#f-q").addEventListener("input", render);
+$("#rows").addEventListener("click", e => {
+  const tr = e.target.closest("tr[data-id]"); if (!tr) return;
+  const l = DATA.lots.find(x => x.id === tr.dataset.id); if (!l) return;
+  if (l.lat) map.setView([l.lat, l.lng], 17);
+  openCard(l);
+});
+
+/* ---------- station card ---------- */
+const CHECKS = [
+  ["walk", "Still empty. Walked it, photographed the door and any sign."],
+  ["acris", "Current owner pulled from ACRIS. The real person, not just the LLC."],
+  ["listing", "Know who has the listing, and have the number."],
+];
+const store = {
+  get(k){ try { return JSON.parse(localStorage.getItem("occ:" + k) || "{}"); } catch(e){ return {}; } },
+  set(k, v){ try { localStorage.setItem("occ:" + k, JSON.stringify(v)); } catch(e){} }
+};
+function lotLinks(bbl){
+  const b = bbl.slice(0,1), block = +bbl.slice(1,6), lot = +bbl.slice(6);
+  return {
+    acris: `https://a836-acris.nyc.gov/bblsearch/bblsearch.asp?borough=${b}&block=${block}&lot=${lot}`,
+    zola: `https://zola.planning.nyc.gov/l/lot/${b}/${block}/${lot}`
+  };
+}
+function openCard(l){
+  sel = l;
+  const k = lotLinks(l.bbl);
+  const sv = l.lat ? `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${l.lat},${l.lng}` : null;
+  const st = store.get(l.id);
+  $("#sc-kick").textContent = `${l.nbhd} · lot ${l.bbl}`;
+  $("#sc-title").textContent = title(l.address);
+  $("#sc-body").innerHTML = `
+    <dl>
+      <dt>Years dark</dt><dd><div class="yrs">${YEARS.map(y => `<span class="${l.darkYears.includes(y) ? "d" : l.filedYears.includes(y) ? "" : "n"}">${y}</span>`).join("")}</div>
+        <div style="font-size:12px;margin-top:6px;color:#555">Black: reported empty on Dec 31. Dashed: no filing found.</div></dd>
+      <dt>Score</dt><dd>${l.yearsDark} of ${l.yearsFiled} filings · longest run ${l.streak}${l.darkLatest ? " · still dark in its latest filing (" + l.latestFiled + ")" : ""}</dd>
+      <dt>Last lease ends</dt><dd>${l.lastLease ? esc(l.lastLease) : "Not reported"}</dd>
+      <dt>Last reported use</dt><dd>${esc(l.lastUse || "Not reported")}</dd>
+      ${l.units.length ? `<dt>Units named</dt><dd>${l.units.map(esc).join(", ")}</dd>` : ""}
+      <dt>Owner</dt><dd><span class="unc">Not in the city data. Pull ACRIS</span></dd>
+    </dl>
+    <div class="links">
+      <a class="btn sm y" href="${k.acris}" target="_blank" rel="noopener">ACRIS, deeds and owner</a>
+      <a class="btn sm" href="${k.zola}" target="_blank" rel="noopener">ZoLa, the lot</a>
+      ${sv ? `<a class="btn sm" href="${sv}" target="_blank" rel="noopener">Street View</a>` : ""}
+    </div>
+    <div class="verify">
+      <div class="th">Before any outreach · all three</div>
+      ${CHECKS.map(([id, t]) => `<label><input type="checkbox" data-c="${id}" ${st[id] ? "checked" : ""}>${t}</label>`).join("")}
+      <div class="note">Ticks are saved in this browser only.</div>
+    </div>`;
+  $("#cardwrap").classList.add("on");
+  $("#sc-x").focus();
+}
+$("#sc-body").addEventListener("change", e => {
+  if (!sel || !e.target.dataset.c) return;
+  const st = store.get(sel.id); st[e.target.dataset.c] = e.target.checked; store.set(sel.id, st);
+});
+const closeCard = () => $("#cardwrap").classList.remove("on");
+$("#sc-x").addEventListener("click", closeCard);
+$("#cardwrap").addEventListener("click", e => { if (e.target.id === "cardwrap") closeCard(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeCard(); });
+
+/* ---------- live refresh ---------- */
+$("#refresh").addEventListener("click", async () => {
+  const b = $("#refresh"); b.disabled = true;
+  try {
+    const rows = await Pipeline.fetchRows(fetch, n => { $("#status").textContent = `Pulling from the city: ${fmt(n)} filings so far.`; });
+    const res = Pipeline.run(rows);
+    DATA = {pulled: new Date().toLocaleDateString("en-CA", tz), rowCount: res.rowCount, years: res.years, lots: res.lots.filter(l => l.yearsDark >= 2), live: true};
+    YEARS = DATA.years; render(); renderTargets();
+    b.textContent = "Pulled. Pull again";
+  } catch (err) {
+    $("#status").innerHTML = `<span class="unc">Live pull failed</span> ${esc(err.message)}. Still showing the snapshot.`;
+  } finally { b.disabled = false; }
+});
+
+/* ---------- target cards ---------- */
+const EVG = q => "https://evgrieve.com/search?q=" + encodeURIComponent(q);
+const SEEDS = [
+  {tier:"hit", label:"Direct hit", addr:"28 Avenue A", match:"28 AVENUE A", where:"Between 2nd and 3rd Streets · former Gracefully",
+   facts:["Dark since November 2014, more than eleven years, per EV Grieve.","5,000 sq ft main floor, 3,500 sq ft basement. Rent on request, most uses considered.","2022 ask was $80 a sq ft. New broker signage June 2025.","Built 1930, five stories, five commercial spaces. Assessor market value about $3.95M."],
+   note:"Too big for PJ alone. Pitch the front of the room, or bring a second maker.", owner:true, q:"Gracefully Avenue A"},
+  {tier:"two", label:"Second tier · verify first", addr:"239 First Ave", match:"239 1 AVENUE", where:"At 14th Street",
+   facts:["Four-story building reported apparently vacant. A corner on a long development watch list.","A 30 day out license fits an owner waiting on a bigger plan better than any lease."],
+   note:"Not in the East Village and Lower East Side pull. It may file under the Stuyvesant Town or Gramercy neighborhood code.", owner:true, q:"239 First Avenue"},
+  {tier:"two", label:"Second tier · walk it", addr:"Avenue A corridor", match:null, where:"Houston to 14th",
+   facts:["A reader count in April 2026 found at least a dozen empty storefronts.","Owners waiting on the right long lease."],
+   note:"Use the finder, set the corridor to the avenues, and walk it with a camera.", corridor:"AVENUE A", q:"Avenue A empty storefronts"},
+  {tier:"two", label:"Second tier · fresh", addr:"Former Francis Kite Club", match:null, where:"Avenue C · for lease as of August 2026",
+   facts:["Fresh, not long dark.","Vented former bar space."], note:"A fresh listing means a broker who wants activity now. Good for Track 1.", owner:true, q:"Francis Kite Club"},
+  {tier:"drop", label:"Dropped", addr:"97 E 3rd St", match:null, where:"Taken by a plant shop, March 2026", facts:[], q:"97 East 3rd Street"},
+  {tier:"drop", label:"Dropped", addr:"149 Avenue A", match:null, where:"Former Blank Street · closed August 2026", facts:["Owner cited electrical. Expected to relet quickly."], q:"149 Avenue A Blank Street"},
+];
+function renderTargets(){
+  $("#tgrid").innerHTML = SEEDS.map(s => {
+    let reg = "";
+    if (s.match) {
+      const hit = DATA.lots.find(l => l.address === s.match);
+      reg = hit
+        ? `<div class="reg"><span class="ok">Registry agrees</span> Reported empty in <b>${hit.yearsDark} of ${hit.yearsFiled}</b> city filings, ${hit.darkYears[0]} to ${hit.darkYears[hit.darkYears.length-1]}. <a href="#finder" data-open="${esc(hit.id)}">Open station card</a></div>`
+        : `<div class="reg"><span class="unc">Not in the registry pull</span></div>`;
+    } else if (s.corridor) {
+      const n = DATA.lots.filter(l => l.street === s.corridor || l.address.endsWith(" " + s.corridor)).filter(l => l.yearsDark >= 3).length;
+      reg = `<div class="reg"><span class="ok">Registry</span> <b>${n}</b> doors on Avenue A reported empty in 3 or more filings.</div>`;
+    }
+    const status = s.tier === "drop" ? "" : `<span class="unc">Verify: walk it</span>`;
+    return `<article class="tcard ${s.tier}">
+      <div class="band"><span>${esc(s.label)}</span>${status}</div>
+      <div class="in"><h3>${esc(s.addr)}</h3><div class="where">${esc(s.where)}</div>
+        ${s.facts.length ? "<ul>" + s.facts.map(f => `<li>${esc(f)}</li>`).join("") + "</ul>" : ""}
+        ${reg}
+        ${s.note ? `<p style="font-family:var(--advis);font-size:13.5px;margin:0">${esc(s.note)}</p>` : ""}
+        ${s.owner ? `<p style="margin:10px 0 0"><span class="unc">Owner unconfirmed</span></p>` : ""}
+      </div>
+      <div class="foot"><a class="btn sm" href="${EVG(s.q)}" target="_blank" rel="noopener">EV Grieve source search</a></div>
+    </article>`;
+  }).join("");
+}
+$("#tgrid").addEventListener("click", e => {
+  const a = e.target.closest("[data-open]"); if (!a) return;
+  e.preventDefault();
+  const l = DATA.lots.find(x => x.id === a.dataset.open); if (l) openCard(l);
+});
+
+/* ---------- boot ---------- */
+fetch("data/targets.json").then(r => r.json()).then(d => {
+  DATA = d; YEARS = d.years; render(); renderTargets();
+  $("#snap-note").textContent = `Snapshot pulled ${d.pulled}: ${fmt(d.rowCount)} filings. The finder can pull live from the city at any time.`;
+}).catch(() => { $("#status").innerHTML = '<span class="unc">Snapshot missing</span> Press "Pull live from the city".'; });
+})();
+</script>
+</body>
+</html>
