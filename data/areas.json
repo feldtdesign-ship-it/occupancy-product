@@ -1,0 +1,50 @@
+{
+ "lower-manhattan": {
+  "pulled": "2026-09-17",
+  "rowCount": 4772,
+  "dark3": 88,
+  "dark3main": 49
+ },
+ "ev-les": {
+  "pulled": "2026-09-17",
+  "rowCount": 10430,
+  "dark3": 122,
+  "dark3main": 55
+ },
+ "soho-village": {
+  "pulled": "2026-09-17",
+  "rowCount": 21704,
+  "dark3": 242,
+  "dark3main": 97
+ },
+ "bk-north": {
+  "pulled": "2026-09-17",
+  "rowCount": 11670,
+  "dark3": 118,
+  "dark3main": 66
+ },
+ "bushwick": {
+  "pulled": "2026-09-17",
+  "rowCount": 4790,
+  "dark3": 37,
+  "dark3main": 25
+ },
+ "dumbo-downtown": {
+  "pulled": "2026-09-17",
+  "rowCount": 10968,
+  "dark3": 106,
+  "dark3main": 51
+ },
+ "bedstuy-crown": {
+  "pulled": "2026-09-17",
+  "rowCount": 6532,
+  "dark3": 65,
+  "dark3main": 26
+ },
+ "park-slope": {
+  "pulled": "2026-09-17",
+  "rowCount": 4880,
+  "dark3": 39,
+  "dark3main": 21
+ }
+}

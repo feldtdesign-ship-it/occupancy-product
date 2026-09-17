@@ -69,8 +69,8 @@ p{max-width:62ch;margin:0 0 14px}
 .lede{font-family:var(--advis);font-size:clamp(17px,1.9vw,21px);line-height:1.5;max-width:60ch;margin-bottom:28px}
 
 /* ---------- UNCONFIRMED ---------- */
-.unc{display:inline-flex;align-items:center;gap:6px;background:var(--orange);color:var(--ink);font-family:var(--advis);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:2px 8px;vertical-align:.12em;white-space:nowrap}
-.unc::before{content:"!";display:inline-grid;place-items:center;width:14px;height:14px;background:var(--ink);color:var(--orange);border-radius:50%;font-size:10px}
+.unc{display:inline-flex;align-items:center;gap:6px;background:var(--orange);color:var(--ink);font-family:var(--advis);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:2px 8px;vertical-align:.12em;max-width:100%}
+.unc::before{content:"!";flex:none;display:inline-grid;place-items:center;width:14px;height:14px;background:var(--ink);color:var(--orange);border-radius:50%;font-size:10px}
 .ok{display:inline-flex;gap:6px;background:var(--olive);color:var(--cream);font-family:var(--advis);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:2px 8px;vertical-align:.12em;white-space:nowrap}
 
 /* ---------- express ---------- */
@@ -81,9 +81,9 @@ p{max-width:62ch;margin:0 0 14px}
 .clockbox .v{font-family:var(--sign);font-size:clamp(40px,5vw,64px);line-height:.95;text-transform:uppercase;margin:6px 0 4px;font-variant-numeric:tabular-nums}
 .clockbox .v.o{color:var(--orange)}
 .clockbox .s{font-family:var(--advis);font-size:13px;line-height:1.45}
-.tracks{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:3px solid var(--ink)}
-.track{padding:22px 22px 26px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink)}
-.track:last-child{border-right:0}
+.tracks{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:3px solid var(--ink)}
+.track{padding:22px 22px 26px;border-bottom:1px solid var(--ink)}
+.track:nth-child(odd){border-right:1px solid var(--ink)}
 .track .hd{display:flex;align-items:center;gap:12px;margin-bottom:12px}
 .track .rd{font-size:22px}
 .track h3{font-family:var(--sign);font-weight:400;font-size:32px;line-height:1;text-transform:uppercase;margin:0}
@@ -146,6 +146,24 @@ p{max-width:62ch;margin:0 0 14px}
 .board .fit{font-family:var(--advis);font-size:13px}
 .board .row.closed .name{color:var(--cement)}
 
+/* ---------- markets ---------- */
+.mk-group{font-family:var(--sign);font-weight:400;text-transform:uppercase;font-size:30px;line-height:1;margin:34px 0 12px;display:flex;align-items:center;gap:12px}
+.mk-group .rd{font-size:18px}
+.board .row.mk{grid-template-columns:1.2fr 1.1fr 1.5fr .8fr 1.3fr}
+.board .row.mk .when{font-family:var(--advis);font-size:12.5px;color:#cfc9bb;margin-top:3px}
+.speedtag{display:inline-block;font-family:var(--advis);font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;background:var(--yellow);color:var(--ink)}
+.speedtag.slow{background:var(--cement)} .speedtag.now{background:var(--olive);color:var(--cream)}
+.street{display:grid;grid-template-columns:repeat(3,1fr);border:3px solid var(--ink);background:#fff}
+.street>div{padding:16px 18px;border-right:1px solid var(--ink)}
+.street>div:last-child{border-right:0}
+.street .v{font-family:var(--glyph);font-size:30px;line-height:1}
+.street .k{font-family:var(--advis);font-size:13px;margin-top:6px;line-height:1.45}
+.areapick{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+.areapick button{font-family:var(--col);font-weight:500;text-transform:uppercase;letter-spacing:.05em;font-size:14px;border:2px solid var(--ink);background:var(--cream);color:var(--ink);padding:6px 10px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.areapick button small{font-family:var(--advis);font-size:10px;letter-spacing:.08em;opacity:.7}
+.areapick button.on{background:var(--ink);color:var(--yellow)}
+.areawhy{font-family:var(--advis);font-size:14px;margin:0 0 14px;border-left:10px solid var(--royal);padding:4px 0 4px 12px}
+
 /* ---------- finder ---------- */
 .finder-bar{display:flex;flex-wrap:wrap;gap:12px;align-items:end;background:var(--ink);color:var(--cream);padding:14px 16px}
 .finder-bar label{font-family:var(--advis);font-size:11px;letter-spacing:.12em;text-transform:uppercase;display:flex;flex-direction:column;gap:5px}
@@ -174,7 +192,7 @@ td.rank{font-family:var(--glyph);font-size:14px;color:#777;width:36px}
 .strip i{display:block;width:11px;height:14px;background:var(--soft)}
 .strip i.d{background:var(--ink)} .strip i.n{background:transparent;border:1px dashed var(--cement)}
 .cor{font-family:var(--advis);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:1px 6px;border:1px solid var(--ink);white-space:nowrap}
-.cor.avenue{background:var(--ink);color:var(--yellow)}
+.cor.main{background:var(--ink);color:var(--yellow)}
 .dq{margin-top:14px;font-family:var(--advis);font-size:12.5px;line-height:1.6;color:#333}
 .dq b{font-weight:700}
 
@@ -238,8 +256,11 @@ footer a{color:var(--cream)}
 /* ---------- responsive ---------- */
 @media (max-width:900px){
   .hero{grid-template-columns:1fr}.sig{max-width:200px;aspect-ratio:auto;padding:26px}
-  .tracks,.clockbox,.pitch-grid,.tgrid,footer .in{grid-template-columns:1fr}
-  .track,.clockbox>div{border-right:0}
+  .tracks,.clockbox,.pitch-grid,.tgrid,footer .in,.street{grid-template-columns:1fr}
+  .track,.track:nth-child(odd),.clockbox>div,.street>div{border-right:0}
+  .street>div{border-bottom:1px solid var(--ink)}
+  .board .row.mk{grid-template-columns:1fr;gap:6px}
+  .board .row.mk>*{grid-column:auto!important}
   .clockbox>div{border-bottom:3px solid var(--ink)} .clockbox>div:last-child{border-bottom:0}
   .finder{grid-template-columns:1fr;height:auto}
   #map{height:360px;border-right:0;border-bottom:3px solid var(--ink)}
@@ -287,6 +308,7 @@ footer a{color:var(--cream)}
     <a href="#express"><span class="rd o">X</span>Express</a>
     <a href="#pitch"><span class="rd y">P</span>The pitch</a>
     <a href="#trains"><span class="rd c">L</span>Other trains</a>
+    <a href="#markets"><span class="rd o">M</span>Markets</a>
     <a href="#finder"><span class="rd r">F</span>The finder</a>
     <a href="#targets"><span class="rd g">T</span>Targets</a>
     <a href="#stops"><span class="rd">S</span>Station stops</a>
@@ -297,7 +319,7 @@ footer a{color:var(--cream)}
 <section class="adv" id="express">
   <div class="adv-head orange"><div class="in"><span class="rd dia"><span>X</span></span><div class="t"><small>Express service · skips the panels</small><h2>A register by November 20</h2></div></div></div>
   <div class="adv-body">
-    <p class="lede">Nobody is going to pick PJ. The programs run panels, the panels run cycles, and the next good cycle is 2027. So we stop applying and start calling. Three tracks run at the same time. Whichever one hands over keys first wins.</p>
+    <p class="lede">Nobody is going to pick PJ. The programs run panels, the panels run cycles, and the next good cycle is 2027. So we stop applying and start calling. Four tracks run at the same time. Whichever one hands over keys first wins. The Seaport is where the receipts come from, so the Seaport is where we look first.</p>
 
     <div class="clockbox">
       <div><div class="k">Doors open</div><div class="v">Fri Nov 20</div><div class="s">One week before Black Friday. Run it through Sunday, January 3.</div></div>
@@ -309,7 +331,7 @@ footer a{color:var(--cream)}
       <div class="track">
         <div class="hd"><span class="rd o">1</span><h3>Call the sign</h3></div>
         <div class="speed">Keys in 2 to 4 weeks · no fee</div>
-        <p>Walk Avenues A, B, C and First with the list below. Every dark door with a sign has a phone number. That number is the owner's own agent. Not a panel. Not a program.</p>
+        <p>Walk the main streets in the finder, starting at the Seaport. Every dark door with a sign has a phone number. That number is the owner's own agent. Not a panel. Not a program.</p>
         <ul>
           <li>Offer: a six week holiday license, percent of gross, 30-day out both ways.</li>
           <li>PJ brings insurance, the receipts, and the art. The owner brings a key.</li>
@@ -319,9 +341,9 @@ footer a{color:var(--cream)}
       <div class="track">
         <div class="hd"><span class="rd r">2</span><h3>Book it</h3></div>
         <div class="speed">Keys in days · costs rent</div>
-        <p>Short-term storefront marketplaces list East Village spaces by the day or week. You pay, you get the room. No selection panel. Terms are agreed with the space owner directly.</p>
+        <p>Short-term storefront marketplaces list Manhattan and Brooklyn spaces by the day or week. You pay, you get the room. No selection panel. Terms are agreed with the space owner directly.</p>
         <ul>
-          <li><a href="https://www.thestorefront.com/search/new-york/east-village/retail" target="_blank" rel="noopener">Storefront, East Village</a> · <a href="https://xnomad.co/s/new-york/east-village" target="_blank" rel="noopener">xNomad</a> · <a href="https://www.popshop.com/spaces?q=new+york" target="_blank" rel="noopener">Popshop</a></li>
+          <li><a href="https://www.thestorefront.com/search/new-york/retail" target="_blank" rel="noopener">Storefront</a> · <a href="https://xnomad.co/s/new-york/east-village" target="_blank" rel="noopener">xNomad</a> · <a href="https://www.popshop.com/spaces?q=new+york" target="_blank" rel="noopener">Popshop</a></li>
           <li>This is the floor. It guarantees November 20 if the other two stall.</li>
         </ul>
         <div class="calc">
@@ -339,6 +361,16 @@ footer a{color:var(--cream)}
           <li>The store's own lease may not allow it. Ask them to check before anything is signed.</li>
         </ul>
       </div>
+      <div class="track">
+        <div class="hd"><span class="rd">4</span><h3>Take a stall</h3></div>
+        <div class="speed">A booth in weeks · weekly fee</div>
+        <p>Markets have organizers, but nobody asks for a lease and most say yes in weeks, not cycles. A holiday market booth is a pop-up with the crowd already booked.</p>
+        <ul>
+          <li>Call the Seaport about its holiday market. Same crowd as the receipts.</li>
+          <li>Apply to Artists and Fleas today. One application, rolling yes, holiday dates open now.</li>
+          <li>FAD Market lists a September 27 deadline for holiday markets. <a href="#markets">The full market board</a></li>
+        </ul>
+      </div>
     </div>
 
     <div class="skip">
@@ -350,9 +382,9 @@ footer a{color:var(--cream)}
     <div class="weeks">
       <h3>The schedule</h3>
       <ol class="stops o">
-        <li><span class="dot">1</span><div><div class="when">Week of Sep 21</div><div class="what">Paper first</div><div class="why">File the sales tax certificate. Confirm the entity that signs. Get a general liability insurance quote; owners will ask to be named on the certificate. Lawyer's fifteen minutes on the license.</div></div></li>
-        <li><span class="dot">2</span><div><div class="when">Sep 28 to Oct 11</div><div class="what">Walk and dial</div><div class="why">Walk the avenue list. Photograph every sign. Call twenty numbers. Book three viewings. Price the marketplace listings as the backup.</div></div></li>
-        <li class="transfer"><span class="dot">T</span><div><div class="when">By Fri Oct 16</div><div class="what">Transfer point</div><div class="why">Signed license from Track 1 or 3? Keep going. Nothing signed? Book Track 2 that day. No second-guessing.</div></div></li>
+        <li><span class="dot">1</span><div><div class="when">Week of Sep 21</div><div class="what">Paper first</div><div class="why">File the sales tax certificate. Confirm the entity that signs. Get a general liability insurance quote; owners will ask to be named on the certificate. Lawyer's fifteen minutes on the license. Apply to the markets on the board.</div></div></li>
+        <li><span class="dot">2</span><div><div class="when">Sep 28 to Oct 11</div><div class="what">Walk and dial</div><div class="why">Walk the Seaport list first, then the rest. Photograph every sign. Call twenty numbers. Book three viewings. Price the marketplace listings as the backup.</div></div></li>
+        <li class="transfer"><span class="dot">T</span><div><div class="when">By Fri Oct 16</div><div class="what">Transfer point</div><div class="why">Signed license from Track 1 or 3, or a holiday booth from Track 4? Keep going. Nothing? Book Track 2 that day. No second-guessing.</div></div></li>
         <li><span class="dot">3</span><div><div class="when">Oct 19 to Nov 15</div><div class="what">Fit it light</div><div class="why">Racks, light, register, signage. Nothing that counts as construction. Turn on Square item tracking before the first sale in the room.</div></div></li>
         <li><span class="dot">4</span><div><div class="when">Fri Nov 20</div><div class="what">Doors open</div><div class="why">Run through January 3. Every week of receipts is the pitch for the next door.</div></div></li>
       </ol>
@@ -378,7 +410,7 @@ footer a{color:var(--cream)}
         <div class="receipts">
           <div class="k">Square receipts · at the Seaport</div>
           <div class="big">$32,212</div>
-          <div style="font-family:var(--advis);font-size:13px">gross, July 1 to September 3, 2026</div>
+          <div style="font-family:var(--advis);font-size:13px">gross, July 1 to September 3, 2026, at the Seaport</div>
           <dl><dt>Transactions</dt><dd>324</dd><dt>Average sale</dt><dd>about $99</dd><dt>Per week</dt><dd>about $3,470</dd><dt>Selling since</dt><dd>2012</dd></dl>
         </div>
         <div class="license">
@@ -421,22 +453,60 @@ footer a{color:var(--cream)}
   </div>
 </section>
 
+<!-- ================= MARKETS ================= -->
+<section class="adv" id="markets">
+  <div class="adv-head orange"><div class="in"><span class="rd">M</span><div class="t"><small>Track 4 · stalls, booths and the sidewalk</small><h2>Markets and flea markets</h2></div></div></div>
+  <div class="adv-body">
+    <p class="lede">A booth is the smallest storefront there is. Somebody else already paid for the crowd, the heat and the ads. These have organizers, so it is not fully direct, but nobody asks for a lease and the wait is weeks, not a year.</p>
+
+    <div class="mk-group"><span class="rd o">H</span>Holiday, November to December</div>
+    <div class="board" role="table">
+      <div class="row mk h" role="row"><span>Market</span><span>Where and when</span><span>How you get in</span><span>Speed</span><span>For PJ</span></div>
+      <div class="row mk" role="row"><span class="name">The Seaport holiday market</span><span>The Seaport<div class="when">Holiday pop-up market, with Pier 17 skating mid-November through January</div></span><span>Run by The Seaport. Who books vendors is not posted. Call the Seaport office, (212) 349-1380. <span class="unc">Unconfirmed</span></span><span><span class="speedtag">Call now</span></span><span class="fit">Top of the list. Same crowd as the receipts.</span></div>
+      <div class="row mk" role="row"><span class="name">FAD Market</span><span>Seaport Square in summer · Empire Stores, DUMBO · St. Paul, Cobble Hill<div class="when">Site lists holiday weekends and weekdays, Nov 30 to Dec 20</div></span><span>Curated application. Site lists a September 27 deadline. The dates on the site may be last year's. <span class="unc">2026 dates unconfirmed</span></span><span><span class="speedtag">Apply this week</span></span><span class="fit">Already runs markets at the Seaport. Ask for a Seaport holiday date.</span></div>
+      <div class="row mk" role="row"><span class="name">Union Square Holiday Market</span><span>Union Square, Manhattan<div class="when">Mid-November to December 24 · about 185 vendors</div></span><span>Urbanspace. Application and interview. Deposit reported at $3,000. <span class="unc">Fee unconfirmed</span></span><span><span class="speedtag slow">Likely full</span></span><span class="fit">The biggest holiday crowd downtown. Ask to be on the cancellation list.</span></div>
+      <div class="row mk" role="row"><span class="name">Columbus Circle Holiday Market</span><span>Columbus Circle, Manhattan<div class="when">100 plus artisan booths</div></span><span>Urbanspace. Inquiry form. <span class="unc">Status unconfirmed</span></span><span><span class="speedtag slow">Likely full</span></span><span class="fit">Uptown tourist crowd. Cancellation list.</span></div>
+      <div class="row mk closed" role="row"><span class="name">Bryant Park Winter Village</span><span>Bryant Park, Manhattan</span><span>Urbanspace. 2026 applications are closed.</span><span><span class="speedtag slow">Closed</span></span><span class="fit">Skip for 2026.</span></div>
+      <div class="row mk" role="row"><span class="name">Markets for Makers, Brooklyn Holiday</span><span>Industry City, 33 35th Street, Brooklyn<div class="when">90 plus makers</div></span><span>Online application. <span class="unc">Dates and fee unconfirmed</span></span><span><span class="speedtag">Apply this week</span></span><span class="fit">Maker crowd. Far from PJ's usual ground.</span></div>
+      <div class="row mk" role="row"><span class="name">Williamsburg Winter Village</span><span>BK Backyard, 151 Banker Street<div class="when">Weekends in December</div></span><span>Local makers. How to apply is not posted. <span class="unc">Unconfirmed</span></span><span><span class="speedtag slow">Ask</span></span><span class="fit">Short run, neighborhood crowd.</span></div>
+    </div>
+
+    <div class="mk-group"><span class="rd y">W</span>Every weekend, all year</div>
+    <div class="board" role="table">
+      <div class="row mk h" role="row"><span>Market</span><span>Where and when</span><span>How you get in</span><span>Speed</span><span>For PJ</span></div>
+      <div class="row mk" role="row"><span class="name">Artists and Fleas</span><span>70 North 7th St, Williamsburg · Chelsea Market<div class="when">Williamsburg Sat and Sun · Chelsea every day · 50 sq ft booths with power</div></span><span>Apply once, rolling yes, new dates every few weeks. Fall and holiday applications open now. Booth fee not posted.</span><span><span class="speedtag now">Apply today</span></span><span class="fit">Best weekly fit. It is a makers' market and it wants the person who made the work.</span></div>
+      <div class="row mk" role="row"><span class="name">Brooklyn Flea</span><span>Dumbo Archway · Chelsea Flea, 29 W 25th St · BQ Flea, 202 Meeker Ave<div class="when">DUMBO Sat and Sun, 8 to 5, year round</div></span><span>Vendor page still shows the 2025 season. Email info@brooklynflea.com. <span class="unc">2026 process unconfirmed</span></span><span><span class="speedtag">Email now</span></span><span class="fit">Big weekend crowd off the bridge. Leans vintage; art fit unconfirmed.</span></div>
+      <div class="row mk" role="row"><span class="name">Grand Bazaar NYC</span><span>Upper West Side<div class="when">Sundays, 10 to 5, year round · 100 to 200 vendors</div></span><span>Curated. Space is limited; approved vendors go on a waitlist.</span><span><span class="speedtag slow">Waitlist</span></span><span class="fit">Art sells here. The wait is the problem.</span></div>
+    </div>
+
+    <div class="mk-group"><span class="rd g">S</span>The sidewalk, no application</div>
+    <div class="street">
+      <div><div class="v">No license</div><div class="k">Art is expressive matter. New York does not require a vendor license to sell it.</div></div>
+      <div><div class="v">12 ft</div><div class="k">Sidewalks only if wider than 12 feet. Table no bigger than 8 ft long, 3 ft wide, 5 ft high.</div></div>
+      <div><div class="v">100 spots</div><div class="k">In Battery Park, Union Square, the High Line and Central Park, only at marked medallion spots. Battery Park is a walk from the Seaport.</div></div>
+    </div>
+    <p class="dq">Sidewalk rules are from NYC Parks and 311. More rules apply near entrances, curbs, bus stops and monuments. Read the full list before setting up. <span class="unc">Check current rules</span></p>
+  </div>
+</section>
+
 <!-- ================= FINDER ================= -->
 <section class="adv" id="finder">
   <div class="adv-head" style="background:var(--royal);color:var(--cream)"><div class="in"><span class="rd y">F</span><div class="t"><small style="color:var(--yellow)">City registry · Local Law 157 of 2019</small><h2>The finder</h2></div></div></div>
   <div class="adv-body">
-    <p class="lede">Every ground floor storefront owner in the city has to tell the Department of Finance whether the space was empty on December 31. We pulled every filing for the East Village and the Lower East Side and counted how many years each door said yes.</p>
+    <p class="lede">Every ground floor storefront owner in the city has to tell the Department of Finance whether the space was empty on December 31. We pulled every filing for eight areas in Manhattan and Brooklyn and counted how many years each door said yes. Pick an area.</p>
+    <div class="areapick" id="areapick" aria-label="Area"></div>
+    <p class="areawhy" id="areawhy"></p>
     <div class="stat3" id="stats">
       <div><div class="v" id="st-rows">--</div><div class="k">Filings pulled</div></div>
       <div><div class="v" id="st-3">--</div><div class="k">Doors dark 3+ years</div></div>
-      <div><div class="v" id="st-av">--</div><div class="k">Of those, on the avenues</div></div>
+      <div><div class="v" id="st-av">--</div><div class="k">Of those, on main streets</div></div>
       <div><div class="v" id="st-max">--</div><div class="k">Most years dark</div></div>
     </div>
     <div class="finder-bar">
-      <label>Corridor<select id="f-cor"><option value="avenue">1st Ave, A, B, C</option><option value="corridor" selected>Avenues plus cross streets</option><option value="all">Everything pulled</option></select></label>
+      <label>Streets<select id="f-cor"><option value="main" selected>Main retail streets</option><option value="corridor">Main plus East Village side streets</option><option value="all">Everything pulled</option></select></label>
       <label>Years dark, at least<select id="f-min"><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option></select></label>
-      <label>Neighborhood<select id="f-nb"><option value="">Both</option><option>East Village</option><option>Lower East Side</option></select></label>
-      <label>Street or number<input id="f-q" type="search" placeholder="Avenue A"></label>
+      <label>Neighborhood<select id="f-nb"><option value="">All in this area</option></select></label>
+      <label>Street or number<input id="f-q" type="search" placeholder="South St"></label>
       <span class="spacer"></span>
       <button class="btn y" id="refresh">Pull live from the city</button>
     </div>
@@ -448,7 +518,7 @@ footer a{color:var(--cream)}
     <div class="dq">
       <b>Read this before you call anyone.</b> The registry says what the owner reported, not what is true today. Walk it.
       Owner names are <b>not</b> in this data; ACRIS has them. The 2025 filings look incomplete in the city feed so far, so a door with no 2025 filing is shown as a dashed box, not as occupied.
-      Yes values come in as YES and Y, both counted. Lots that ever reported construction are dropped. Doors are grouped by tax lot and street address; a building with two storefronts on one address counts once.
+      Yes values come in as YES and Y, both counted. Lots that ever reported construction are dropped. Doors are grouped by tax lot and street address; a building with two storefronts on one address counts once. In Lower Manhattan some hits are office towers with ground floor retail; check the building before walking it.
       <span class="unc">Street names in the feed are messy; a few doors may split or merge</span>
     </div>
   </div>
@@ -458,7 +528,7 @@ footer a{color:var(--cream)}
 <section class="adv" id="targets">
   <div class="adv-head" style="background:var(--olive);color:var(--cream)"><div class="in"><span class="rd y">T</span><div class="t"><small style="color:var(--yellow)">First station cards · every one needs a walk</small><h2>The target list</h2></div></div></div>
   <div class="adv-body">
-    <p class="lede">These came from the news before the registry pull. Where the registry agrees, the card says so.</p>
+    <p class="lede">East Village doors from the news, before the registry pull. Where the registry agrees, the card says so. For the Seaport and Brooklyn, start in the finder.</p>
     <div class="tgrid" id="tgrid"></div>
   </div>
 </section>
@@ -471,10 +541,11 @@ footer a{color:var(--cream)}
       <li><span class="dot">1</span><div><div class="what">Confirm the entity that signs</div><div class="why">The name on the license, the insurance, the tax certificate and the bank account should all match.</div></div></li>
       <li><span class="dot">2</span><div><div class="what">File the sales tax certificate</div><div class="why">20 days before the first sale in a room. Oct 31 at the latest for Nov 20.</div></div></li>
       <li><span class="dot">3</span><div><div class="what">Turn on item tracking in Square</div><div class="why">Every sale is still "Custom Amount." An owner will ask what sold. Right now nobody can say.</div></div></li>
-      <li><span class="dot">4</span><div><div class="what">Walk the list</div><div class="why">Use the finder. Avenues first. Photograph every sign and every phone number.</div></div></li>
+      <li><span class="dot">4</span><div><div class="what">Walk the list</div><div class="why">Use the finder. Seaport and Lower Manhattan first, main streets only. Photograph every sign and every phone number.</div></div></li>
       <li><span class="dot">5</span><div><div class="what">ACRIS the top five</div><div class="why">Get the real owner, not the LLC name on the door. The filing may be older than the last sale.</div></div></li>
-      <li><span class="dot">6</span><div><div class="what">Lawyer's fifteen minutes</div><div class="why">On the license one-pager, before it reaches an owner.</div></div></li>
-      <li class="transfer"><span class="dot">7</span><div><div class="what">First pitch: 28 Avenue A</div><div class="why">Dark in every city filing since 2019. Too big for one maker; pitch the front of the room or bring a second.</div></div></li>
+      <li><span class="dot">6</span><div><div class="what">Apply to three markets</div><div class="why">The Seaport holiday market, Artists and Fleas, and FAD Market. A booth still sells in December if no door opens.</div></div></li>
+      <li><span class="dot">7</span><div><div class="what">Lawyer's fifteen minutes</div><div class="why">On the license one-pager, before it reaches an owner.</div></div></li>
+      <li class="transfer"><span class="dot">8</span><div><div class="what">First pitch: the best Seaport door</div><div class="why">Walk the Seaport list and pitch the strongest door with the receipts in hand. 28 Avenue A is the second call: dark in every city filing since 2019, too big for one maker.</div></div></li>
     </ol>
   </div>
 </section>
@@ -489,7 +560,9 @@ footer a{color:var(--cream)}
         <li>NYC Comptroller, "Who's Minding the Storefronts?", June 4, 2026. About 15,700 vacant storefronts citywide. <span class="unc">Unconfirmed if its data is downloadable</span></li>
         <li><a href="https://www.tax.ny.gov/bus/st/register.htm" target="_blank" rel="noopener">NYS Tax Department, register as a sales tax vendor</a></li>
         <li>EV Grieve, 2022 to 2026, for the target cards</li>
-        <li>Square export, PJ O'Rourke II, July 1 to September 3, 2026</li>
+        <li>Market organizer sites: Urbanspace, Artists and Fleas, Brooklyn Flea, FAD Market, Markets for Makers, Grand Bazaar NYC, The Seaport</li>
+        <li><a href="https://portal.311.nyc.gov/article/?kanumber=KA-02912" target="_blank" rel="noopener">NYC 311, park art vendor rules</a></li>
+        <li>Square export, PJ O'Rourke II, Seaport, July 1 to September 3, 2026</li>
       </ul>
     </div>
     <div>
@@ -514,7 +587,13 @@ footer a{color:var(--cream)}
 const $ = s => document.querySelector(s);
 const fmt = n => n.toLocaleString("en-US");
 const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const title = s => String(s || "").toLowerCase().replace(/\b(\d+) avenue\b/, (m, d) => d === "1" ? "First Ave" : d + " Ave").replace(/\bavenue\b/, "Ave").replace(/\beast\b/, "E").replace(/\b(\d+) street\b/, "$1th St").replace(/\bstreet\b/, "St").replace(/\b\w/g, c => c.toUpperCase()).replace(/\b(1)th\b/,"1st").replace(/\b(2)th\b/,"2nd").replace(/\b(3)th\b/,"3rd").replace(/\b11st\b/,"11th").replace(/\b12nd\b/,"12th").replace(/\b13rd\b/,"13th");
+const ord = n => { n = +n; const t = n % 100; return n + (t >= 11 && t <= 13 ? "th" : ["th","st","nd","rd"][n % 10] || "th"); };
+const title = s => String(s || "").toLowerCase()
+  .replace(/\b(\d+) (avenue|street)\b(?! [a-d]\b)/g, (m, d, w) => ord(d) + " " + w)
+  .replace(/\bavenue of the americas\b/, "Sixth Ave")
+  .replace(/\b1st avenue\b/, "First Ave").replace(/\bavenue\b/g, "Ave").replace(/\bstreet\b/g, "St").replace(/\bboulevard\b/g, "Blvd")
+  .replace(/\beast\b/, "E").replace(/\bwest (\d)/, "W $1").replace(/\bnorth (\d)/, "N $1").replace(/\bsouth (\d)/, "S $1")
+  .replace(/\b[a-z]/g, c => c.toUpperCase()).replace(/\b(\d+)(St|Nd|Rd|Th)\b/g, (m, d, x) => d + x.toLowerCase());
 
 /* clock + countdown */
 const tz = {timeZone:"America/New_York"};
@@ -540,8 +619,9 @@ $("#wk").addEventListener("input", calc); calc();
 $("#print").addEventListener("click", () => window.print());
 
 /* ---------- finder ---------- */
-let DATA = null, YEARS = [], sel = null, markers = new Map();
-const map = L.map("map", {scrollWheelZoom:false, zoomControl:true}).setView([40.7235, -73.9840], 15);
+let DATA = null, YEARS = [], sel = null, markers = new Map(), AREA = Pipeline.AREAS[0], INDEX = {};
+const CACHE = {};
+const map = L.map("map", {scrollWheelZoom:false, zoomControl:true}).setView(AREA.center, 15);
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {maxZoom:19, className:"osm", attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
 const layer = L.layerGroup().addTo(map);
 const colorFor = n => n >= 6 ? "#0C0C0C" : n >= 5 ? "#F0611F" : n >= 4 ? "#1E4FD6" : n >= 3 ? "#5F6B3C" : "#9B9B95";
@@ -550,7 +630,7 @@ function filtered(){
   const cor = $("#f-cor").value, min = +$("#f-min").value, nb = $("#f-nb").value, q = $("#f-q").value.trim().toUpperCase();
   return DATA.lots.filter(l =>
     l.yearsDark >= min &&
-    (cor === "all" || (cor === "avenue" ? l.corridor === "avenue" : !!l.corridor)) &&
+    (cor === "all" || (cor === "main" ? l.corridor === "main" : !!l.corridor)) &&
     (!nb || l.nbhd === nb) &&
     (!q || l.address.includes(q) || title(l.address).toUpperCase().includes(q)));
 }
@@ -564,11 +644,11 @@ function render(){
   const all3 = DATA.lots.filter(l => l.yearsDark >= 3);
   $("#st-rows").textContent = fmt(DATA.rowCount);
   $("#st-3").textContent = fmt(all3.length);
-  $("#st-av").textContent = fmt(all3.filter(l => l.corridor === "avenue").length);
-  $("#st-max").textContent = Math.max(...DATA.lots.map(l => l.yearsDark)) + " of " + YEARS.length;
+  $("#st-av").textContent = fmt(all3.filter(l => l.corridor === "main").length);
+  $("#st-max").textContent = DATA.lots.length ? Math.max(...DATA.lots.map(l => l.yearsDark)) + " of " + YEARS.length : "--";
 
   $("#rows").innerHTML = list.slice(0, 300).map((l, i) =>
-    `<tr data-id="${esc(l.id)}"><td class="rank">${i + 1}</td><td class="addr">${esc(title(l.address))}<div style="font-weight:400;font-size:11.5px;color:#666">${esc(l.nbhd)}</div></td><td>${strip(l)}</td><td class="col-hide">${l.yearsDark} of ${l.yearsFiled}</td><td class="col-hide">${l.corridor ? `<span class="cor ${l.corridor}">${l.corridor === "avenue" ? "Avenue" : "Cross"}</span>` : ""}</td></tr>`).join("")
+    `<tr data-id="${esc(l.id)}"><td class="rank">${i + 1}</td><td class="addr">${esc(title(l.address))}<div style="font-weight:400;font-size:11.5px;color:#666">${esc(l.nbhd)}</div></td><td>${strip(l)}</td><td class="col-hide">${l.yearsDark} of ${l.yearsFiled}</td><td class="col-hide">${l.corridor ? `<span class="cor ${l.corridor}">${l.corridor === "main" ? "Main" : "Side"}</span>` : ""}</td></tr>`).join("")
     || `<tr><td colspan="5" style="padding:20px;font-family:var(--advis)">No doors match. Loosen a filter.</td></tr>`;
 
   layer.clearLayers(); markers.clear();
@@ -579,10 +659,36 @@ function render(){
       .bindTooltip(`${title(l.address)} · dark ${l.yearsDark} of ${l.yearsFiled}`).on("click", () => openCard(l));
     m.addTo(layer); markers.set(l.id, m); pts.push([l.lat, l.lng]);
   }
+  if (render.fit && pts.length) { map.fitBounds(pts, {padding:[24,24], maxZoom:16}); render.fit = false; }
   $("#status").innerHTML = `<b>${fmt(list.length)}</b> doors shown${list.length > 300 ? " (table shows top 300)" : ""} · ${list.filter(l => !l.lat).length} have no map point · source pulled <b>${esc(DATA.pulled)}</b>${DATA.live ? ' <span class="ok">Live</span>' : " · snapshot"} · legend: <span class="rd" style="font-size:9px;--c:#0C0C0C"></span> 6+ <span class="rd o" style="font-size:9px"></span> 5 <span class="rd r" style="font-size:9px"></span> 4 <span class="rd g" style="font-size:9px"></span> 3 years`;
 }
 
-["#f-cor","#f-min","#f-nb"].forEach(s => $(s).addEventListener("change", render));
+["#f-cor","#f-min","#f-nb"].forEach(s => $(s).addEventListener("change", () => { render.fit = true; render(); }));
+
+/* ---------- areas ---------- */
+function paintPicker(){
+  $("#areapick").innerHTML = Pipeline.AREAS.map(a => {
+    const n = INDEX[a.id] ? INDEX[a.id].dark3main : null;
+    return `<button type="button" data-a="${a.id}" class="${a.id === AREA.id ? "on" : ""}" aria-pressed="${a.id === AREA.id}">${esc(a.name)}${n != null ? `<small>${n}</small>` : ""}</button>`;
+  }).join("");
+}
+async function loadArea(id){
+  AREA = Pipeline.AREAS.find(a => a.id === id) || Pipeline.AREAS[0];
+  paintPicker();
+  $("#areawhy").innerHTML = `<b>${esc(AREA.borough)}.</b> ${esc(AREA.why)} Main streets: ${AREA.main.slice(0, 8).map(title).map(esc).join(", ")}${AREA.main.length > 8 ? " and more" : ""}.`;
+  $("#status").textContent = "Loading " + AREA.name + ".";
+  $("#refresh").textContent = "Pull live from the city";
+  if (!CACHE[id]) CACHE[id] = await fetch(`data/areas/${id}.json`).then(r => { if (!r.ok) throw new Error("snapshot " + r.status); return r.json(); });
+  if (AREA.id !== id) return;          // another area was picked while this one loaded
+  DATA = CACHE[id]; YEARS = DATA.years;
+  const nbs = [...new Set(DATA.lots.map(l => l.nbhd))].sort();
+  $("#f-nb").innerHTML = `<option value="">All in this area</option>` + nbs.map(n => `<option>${esc(n)}</option>`).join("");
+  render.fit = true; render();
+}
+$("#areapick").addEventListener("click", e => {
+  const b = e.target.closest("button[data-a]"); if (!b) return;
+  loadArea(b.dataset.a).catch(err => { $("#status").innerHTML = `<span class="unc">Snapshot missing</span> ${esc(err.message)}. Press "Pull live from the city".`; });
+});
 $("#f-q").addEventListener("input", render);
 $("#rows").addEventListener("click", e => {
   const tr = e.target.closest("tr[data-id]"); if (!tr) return;
@@ -651,10 +757,12 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") closeCard();
 $("#refresh").addEventListener("click", async () => {
   const b = $("#refresh"); b.disabled = true;
   try {
-    const rows = await Pipeline.fetchRows(fetch, n => { $("#status").textContent = `Pulling from the city: ${fmt(n)} filings so far.`; });
-    const res = Pipeline.run(rows);
-    DATA = {pulled: new Date().toLocaleDateString("en-CA", tz), rowCount: res.rowCount, years: res.years, lots: res.lots.filter(l => l.yearsDark >= 2), live: true};
-    YEARS = DATA.years; render(); renderTargets();
+    const area = AREA;
+    const rows = await Pipeline.fetchRows(area, fetch, n => { $("#status").textContent = `Pulling ${area.name} from the city: ${fmt(n)} filings so far.`; });
+    const res = Pipeline.run(rows, area);
+    CACHE[area.id] = {pulled: new Date().toLocaleDateString("en-CA", tz), rowCount: res.rowCount, years: res.years, lots: res.lots.filter(l => l.yearsDark >= 2), live: true};
+    if (AREA.id === area.id) { DATA = CACHE[area.id]; YEARS = DATA.years; render(); }
+    if (area.id === "ev-les") renderTargets();
     b.textContent = "Pulled. Pull again";
   } catch (err) {
     $("#status").innerHTML = `<span class="unc">Live pull failed</span> ${esc(err.message)}. Still showing the snapshot.`;
@@ -672,22 +780,23 @@ const SEEDS = [
    note:"Not in the East Village and Lower East Side pull. It may file under the Stuyvesant Town or Gramercy neighborhood code.", owner:true, q:"239 First Avenue"},
   {tier:"two", label:"Second tier · walk it", addr:"Avenue A corridor", match:null, where:"Houston to 14th",
    facts:["A reader count in April 2026 found at least a dozen empty storefronts.","Owners waiting on the right long lease."],
-   note:"Use the finder, set the corridor to the avenues, and walk it with a camera.", corridor:"AVENUE A", q:"Avenue A empty storefronts"},
+   note:"In the finder, pick East Village and Lower East Side, type Avenue A, and walk it with a camera.", corridor:"AVENUE A", q:"Avenue A empty storefronts"},
   {tier:"two", label:"Second tier · fresh", addr:"Former Francis Kite Club", match:null, where:"Avenue C · for lease as of August 2026",
    facts:["Fresh, not long dark.","Vented former bar space."], note:"A fresh listing means a broker who wants activity now. Good for Track 1.", owner:true, q:"Francis Kite Club"},
   {tier:"drop", label:"Dropped", addr:"97 E 3rd St", match:null, where:"Taken by a plant shop, March 2026", facts:[], q:"97 East 3rd Street"},
   {tier:"drop", label:"Dropped", addr:"149 Avenue A", match:null, where:"Former Blank Street · closed August 2026", facts:["Owner cited electrical. Expected to relet quickly."], q:"149 Avenue A Blank Street"},
 ];
 function renderTargets(){
+  const EV = CACHE["ev-les"]; if (!EV) return;
   $("#tgrid").innerHTML = SEEDS.map(s => {
     let reg = "";
     if (s.match) {
-      const hit = DATA.lots.find(l => l.address === s.match);
+      const hit = EV.lots.find(l => l.address === s.match);
       reg = hit
         ? `<div class="reg"><span class="ok">Registry agrees</span> Reported empty in <b>${hit.yearsDark} of ${hit.yearsFiled}</b> city filings, ${hit.darkYears[0]} to ${hit.darkYears[hit.darkYears.length-1]}. <a href="#finder" data-open="${esc(hit.id)}">Open station card</a></div>`
         : `<div class="reg"><span class="unc">Not in the registry pull</span></div>`;
     } else if (s.corridor) {
-      const n = DATA.lots.filter(l => l.street === s.corridor || l.address.endsWith(" " + s.corridor)).filter(l => l.yearsDark >= 3).length;
+      const n = EV.lots.filter(l => l.street === s.corridor).filter(l => l.yearsDark >= 3).length;
       reg = `<div class="reg"><span class="ok">Registry</span> <b>${n}</b> doors on Avenue A reported empty in 3 or more filings.</div>`;
     }
     const status = s.tier === "drop" ? "" : `<span class="unc">Verify: walk it</span>`;
@@ -706,14 +815,17 @@ function renderTargets(){
 $("#tgrid").addEventListener("click", e => {
   const a = e.target.closest("[data-open]"); if (!a) return;
   e.preventDefault();
-  const l = DATA.lots.find(x => x.id === a.dataset.open); if (l) openCard(l);
+  const l = CACHE["ev-les"] && CACHE["ev-les"].lots.find(x => x.id === a.dataset.open); if (l) openCard(l);
 });
 
 /* ---------- boot ---------- */
-fetch("data/targets.json").then(r => r.json()).then(d => {
-  DATA = d; YEARS = d.years; render(); renderTargets();
-  $("#snap-note").textContent = `Snapshot pulled ${d.pulled}: ${fmt(d.rowCount)} filings. The finder can pull live from the city at any time.`;
-}).catch(() => { $("#status").innerHTML = '<span class="unc">Snapshot missing</span> Press "Pull live from the city".'; });
+(async () => {
+  try { INDEX = await fetch("data/areas.json").then(r => r.json()); } catch (e) { INDEX = {}; }
+  const vals = Object.values(INDEX);
+  if (vals.length) $("#snap-note").textContent = `Snapshot pulled ${vals[0].pulled}: ${fmt(vals.reduce((t, v) => t + v.rowCount, 0))} filings across ${vals.length} areas. The finder can pull any area live from the city.`;
+  try { await loadArea(AREA.id); } catch (e) { $("#status").innerHTML = '<span class="unc">Snapshot missing</span> Press "Pull live from the city".'; }
+  try { CACHE["ev-les"] = CACHE["ev-les"] || await fetch("data/areas/ev-les.json").then(r => r.json()); renderTargets(); } catch (e) {}
+})();
 })();
 </script>
 </body>
